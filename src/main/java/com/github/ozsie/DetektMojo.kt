@@ -1,147 +1,111 @@
 package com.github.ozsie
 
-import io.gitlab.arturbosch.detekt.cli.Args
 import io.gitlab.arturbosch.detekt.cli.ConfigExporter
 import io.gitlab.arturbosch.detekt.cli.Runner
 import io.gitlab.arturbosch.detekt.cli.parseArguments
 import org.apache.maven.plugin.AbstractMojo
 import org.apache.maven.project.MavenProject
 import org.apache.maven.plugins.annotations.*
-import org.sonatype.aether.RepositorySystemSession
+import java.io.File
 
+@Suppress("unused")
 @Mojo(name = "detekt", defaultPhase = LifecyclePhase.VERIFY,
         requiresDependencyCollection = ResolutionScope.TEST,
         requiresDependencyResolution = ResolutionScope.TEST)
 class DetektMojo : AbstractMojo() {
     @Parameter(property = "detekt.baseline", defaultValue = "")
-    var baseline = ""
+    private var baseline = ""
 
     @Parameter(property = "detekt.config", defaultValue = "")
-    var config: String = ""
+    private var config: String = ""
 
     @Parameter(property = "detekt.config-resource", defaultValue = "")
-    var configResource = ""
+    private var configResource = ""
 
     @Parameter(property = "detekt.create-baseline", defaultValue = "false")
-    var createBaseline = false
+    private var createBaseline = false
 
     @Parameter(property = "detekt.debug", defaultValue = "false")
-    var debug = false
+    private var debug = false
 
     @Parameter(property = "detekt.disable-default-rulesets", defaultValue = "false")
-    var disableDefaultRulesets = false
+    private var disableDefaultRuleSets = false
 
     @Parameter(property = "detekt.filters")
-    var filters = ArrayList<String>()
+    private var filters = ArrayList<String>()
 
     @Parameter(property = "detekt.generate-config", defaultValue = "false")
-    var generateConfig = false
+    private var generateConfig = false
 
     @Parameter(property = "detekt.help", defaultValue = "false")
-    var help = false
+    private var help = false
 
     @Parameter(property = "detekt.input", defaultValue = "\${basedir}/src")
-    var input = "\${basedir}/src"
+    private var input = "\${basedir}/src"
 
     @Parameter(property = "detekt.output", defaultValue = "\${basedir}/detekt")
-    var output = "\${basedir}/detekt"
+    private var output = "\${basedir}/detekt"
 
     @Parameter(property = "detekt.output-name", defaultValue = "")
-    var outputName = ""
+    private var outputName = ""
 
     @Parameter(property = "detekt.parallel", defaultValue = "false")
-    var parallel = false
+    private var parallel = false
 
     @Parameter(property = "detekt.plugins")
-    var plugins = ArrayList<String>()
+    private var plugins = ArrayList<String>()
 
     @Parameter(defaultValue = "\${project}", readonly = true)
-    var mavenProject: MavenProject? = null
+    private var mavenProject: MavenProject? = null
 
     @Parameter(defaultValue = "\${settings.localRepository}", readonly = true)
-    var localRepoLocation = "\${settings.localRepository}"
+    private var localRepoLocation = "\${settings.localRepository}"
 
     override fun execute() {
-        val cliString = buildCLIString()
-        val arguments = parseArguments(cliString)
-        val executable = when {
+        val arguments = parseArguments(buildCLIString())
+        when {
             arguments.generateConfig -> ConfigExporter()
             else -> Runner(arguments)
-        }
-        executable.execute()
+        }.execute()
     }
 
-    private fun buildCLIString(): Array<String> {
-        val parameters = ArrayList<String>()
-        if (help) {
-            parameters.add("-h")
-        }
-        if (baseline.isNotEmpty()) {
-            parameters.add("-b")
-            parameters.add(baseline)
-        }
-        if (config.isNotEmpty()) {
-            parameters.add("-c")
-            parameters.add(config)
-        }
-        if (configResource.isNotEmpty()) {
-            parameters.add("-cr")
-            parameters.add(configResource)
-        }
-        if (createBaseline) {
-            parameters.add("-cb")
-        }
-        if (debug) {
-            parameters.add("--debug")
-        }
-        if (disableDefaultRulesets) {
-            parameters.add("-dd")
-        }
-        if (!filters.isEmpty()) {
-            parameters.add("-f")
-            parameters.add(filters.joinToString(";"))
-        }
-        if (generateConfig) {
-            parameters.add("-gc")
-        }
-        if (input.isNotEmpty()) {
-            parameters.add("-i")
-            parameters.add(input)
-        }
-        if (output.isNotEmpty()) {
-            parameters.add("-o")
-            parameters.add(output)
-        }
-        if (outputName.isNotEmpty()) {
-            parameters.add("-on")
-            parameters.add(outputName)
-        }
-        if (parallel) {
-            parameters.add("-parallel")
-        }
-        if (!plugins.isEmpty()) {
-            parameters.add("-p")
-            val mvnPlugin = mavenProject?.getPlugin("com.github.ozsie:detekt-maven-plugin")
-            plugins.forEach { plugin ->
-                val artifacts = mvnPlugin
-                        ?.dependencies
-                        ?.filter {
-                    plugin == "${it.groupId}:${it.artifactId}"
-                }
+    private fun buildCLIString() = ArrayList<String>().apply {
+        useIf(help, HELP)
+                .useIf(createBaseline, CREATE_BASELINE)
+                .useIf(debug, DEBUG)
+                .useIf(disableDefaultRuleSets, DISABLE_DEFAULT_RULE_SET)
+                .useIf(generateConfig, GENERATE_CONFIG)
+                .useIf(parallel, PARALLEL)
+                .useIf(baseline.isNotEmpty(), BASELINE, baseline)
+                .useIf(config.isNotEmpty(), CONFIG, config)
+                .useIf(configResource.isNotEmpty(), CONFIG_RESOURCE, configResource)
+                .useIf(filters.isNotEmpty(), FILTERS, filters.joinToString(";"))
+                .useIf(input.isNotEmpty(), INPUT, input)
+                .useIf(output.isNotEmpty(), OUTPUT, output)
+                .useIf(outputName.isNotEmpty(), OUTPUT_NAME, outputName)
+                .useIf(plugins.isNotEmpty(), PLUGINS, buildPluginPaths())
+    }.also { log.info("Args: $it") }.toTypedArray()
 
-                val pluginPaths = StringBuilder()
-                artifacts?.forEach {
-                    val path = "$localRepoLocation/${it.groupId.replace(".", "/")}/${it.artifactId}/${it.version}/${it.artifactId}-${it.version}.jar"
-                    log.info("Plugin path: $path")
+    private fun buildPluginPaths() = StringBuilder().apply {
+        val mvnPlugin = mavenProject?.getPlugin("com.github.ozsie:detekt-maven-plugin")
+        plugins.forEach { plugin ->
+            if (File(plugin).exists()) {
+                append(plugin).append(";")
+            } else {
+                mvnPlugin?.dependencies
+                        ?.filter { plugin == "${it.groupId}:${it.artifactId}" }
+                        ?.forEach {
+                    val path = localRepoLocation +
+                            "/" + it.groupId.replace(".", "/") +
+                            "/" + it.artifactId +
+                            "/" + it.version +
+                            "/" + "${it.artifactId}-${it.version}.jar"
 
-                    pluginPaths.append(path).append(";")
+                    append(path).append(";")
                 }
-                parameters.add(pluginPaths.toString().removeSuffix(";"))
             }
         }
+    }.toString().removeSuffix(";")
 
-        log.info("Args: $parameters")
-        return parameters.toTypedArray()
-    }
-
+    private fun <T> ArrayList<T>.useIf(w: Boolean, vararg value: T) = apply { if (w) addAll(value) }
 }
