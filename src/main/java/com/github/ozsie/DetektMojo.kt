@@ -1,15 +1,13 @@
-package sample.plugin
+package com.github.ozsie
 
+import io.gitlab.arturbosch.detekt.cli.Args
 import io.gitlab.arturbosch.detekt.cli.ConfigExporter
 import io.gitlab.arturbosch.detekt.cli.Runner
 import io.gitlab.arturbosch.detekt.cli.parseArguments
 import org.apache.maven.plugin.AbstractMojo
-import org.apache.maven.plugins.annotations.Mojo
-import org.apache.maven.plugins.annotations.Parameter
-import org.apache.maven.plugins.annotations.LifecyclePhase
-import org.apache.maven.plugins.annotations.ResolutionScope
 import org.apache.maven.project.MavenProject
-
+import org.apache.maven.plugins.annotations.*
+import org.sonatype.aether.RepositorySystemSession
 
 @Mojo(name = "detekt", defaultPhase = LifecyclePhase.VERIFY,
         requiresDependencyCollection = ResolutionScope.TEST,
@@ -60,8 +58,12 @@ class DetektMojo : AbstractMojo() {
     @Parameter(defaultValue = "\${project}", readonly = true)
     var mavenProject: MavenProject? = null
 
+    @Parameter(defaultValue = "\${settings.localRepository}", readonly = true)
+    var localRepoLocation = "\${settings.localRepository}"
+
     override fun execute() {
-        val arguments = parseArguments(buildCLIString())
+        val cliString = buildCLIString()
+        val arguments = parseArguments(cliString)
         val executable = when {
             arguments.generateConfig -> ConfigExporter()
             else -> Runner(arguments)
@@ -119,17 +121,27 @@ class DetektMojo : AbstractMojo() {
         }
         if (!plugins.isEmpty()) {
             parameters.add("-p")
+            val mvnPlugin = mavenProject?.getPlugin("com.github.ozsie:detekt-maven-plugin")
             plugins.forEach { plugin ->
-                val artifacts = mavenProject?.artifacts?.filter {
-                    "${it.groupId}:${it.artifactId}" == plugin
+                val artifacts = mvnPlugin
+                        ?.dependencies
+                        ?.filter {
+                    plugin == "${it.groupId}:${it.artifactId}"
                 }
 
-                if (artifacts != null && artifacts.isNotEmpty()) {
-                    parameters.add(artifacts.first().file.absolutePath)
+                val pluginPaths = StringBuilder()
+                artifacts?.forEach {
+                    val path = "$localRepoLocation/${it.groupId.replace(".", "/")}/${it.artifactId}/${it.version}/${it.artifactId}-${it.version}.jar"
+                    log.info("Plugin path: $path")
+
+                    pluginPaths.append(path).append(";")
                 }
+                parameters.add(pluginPaths.toString().removeSuffix(";"))
             }
         }
 
+        log.info("Args: $parameters")
         return parameters.toTypedArray()
     }
+
 }
