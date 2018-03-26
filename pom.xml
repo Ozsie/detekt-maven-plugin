@@ -4,7 +4,7 @@
 
     <groupId>com.github.ozsie</groupId>
     <artifactId>detekt-maven-plugin</artifactId>
-    <version>1.0.0.RC6-3</version>
+    <version>1.0.0.RC6-4-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
 
     <name>detekt-maven-plugin Maven Plugin</name>
@@ -15,7 +15,7 @@
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <kotlin.version>1.2.31</kotlin.version>
-        <detekt.version>${project.version}</detekt.version>
+        <detekt.version>1.0.0.RC6-4</detekt.version>
         <jcommander.version>1.72</jcommander.version>
         <snakeyaml.version>1.20</snakeyaml.version>
     </properties>
@@ -98,6 +98,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.7.0</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
