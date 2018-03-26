@@ -1,6 +1,8 @@
-#Detekt Maven Plugin
+# Detekt Maven Plugin
 A maven plugin that wraps the Detekt CLI. It supports the same parameters as the Detekt CLI.
 
+## How to use
+**Basic configuration**
 ```xml
 <build>
     <plugin>
@@ -13,21 +15,8 @@ A maven plugin that wraps the Detekt CLI. It supports the same parameters as the
                     <id>detekt</id>
                     <phase>verify</phase>
                     <goals><goal>detekt</goal></goals>
-                    <configuration>
-                        <config>${basedir}/detekt.yml</config>
-                        <plugins>
-                            <plugin>com.github.ozsie:detekt-coverity-report</plugin>
-                        </plugins>
-                    </configuration>
                 </execution>
             </executions>
-            <dependencies>
-                <dependency>
-                    <groupId>com.github.ozsie</groupId>
-                    <artifactId>detekt-coverity-report</artifactId>
-                    <version>${detekt.coverity.version}</version>
-                </dependency>
-            </dependencies>
         </plugin>
     </plugin>
 </build>
@@ -43,3 +32,6 @@ A maven plugin that wraps the Detekt CLI. It supports the same parameters as the
     </pluginRepository>
 </pluginRepositories>
 ```
+Using the above configuration, Detekt will scan source files in _${basedir}/src_ and output the results in _${basedir}/detekt_.
+
+All parameters available to Detekt version _1.0.0.RC6_3_ can be configured in the plugin
