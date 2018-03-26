@@ -8,15 +8,26 @@ A maven plugin that wraps the Detekt CLI. It supports the same parameters as the
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
             <version>1.0.0-SNAPSHOT</version>
-            <configuration>
-                <input>${basedir}/src</input>
-                <filters>.*test.*</filters>
-                <output>${basedir}/detekt</output>
-                <config>${basedir}/detekt.yml</config>
-                <plugins>
-                    <plugin>com.github.ozsie:detekt-coverity-report</plugin>
-                </plugins>
-            </configuration>
+            <executions>
+                <execution>
+                    <id>detekt</id>
+                    <phase>verify</phase>
+                    <goals><goal>detekt</goal></goals>
+                    <configuration>
+                        <config>${basedir}/detekt.yml</config>
+                        <plugins>
+                            <plugin>com.github.ozsie:detekt-coverity-report</plugin>
+                        </plugins>
+                    </configuration>
+                </execution>
+            </executions>
+            <dependencies>
+                <dependency>
+                    <groupId>com.github.ozsie</groupId>
+                    <artifactId>detekt-coverity-report</artifactId>
+                    <version>${detekt.coverity.version}</version>
+                </dependency>
+            </dependencies>
         </plugin>
     </plugin>
 </build>
