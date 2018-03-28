@@ -1,16 +1,12 @@
 package com.github.ozsie
 
-import io.gitlab.arturbosch.detekt.cli.ConfigExporter
 import io.gitlab.arturbosch.detekt.cli.Runner
 import io.gitlab.arturbosch.detekt.cli.parseArguments
-import org.apache.maven.plugin.AbstractMojo
-import org.apache.maven.project.MavenProject
 import org.apache.maven.plugins.annotations.*
-import java.io.File
 
 @Suppress("unused")
 @Mojo(name = "create-baseline")
-class CreateBaselineMojo : DetektMojo() {
+open class CreateBaselineMojo : DetektMojo() {
 
     override fun execute() = Runner(parseArguments(cliString)).execute()
 
@@ -30,3 +26,7 @@ class CreateBaselineMojo : DetektMojo() {
                     .add(CREATE_BASELINE)
             }.log().toTypedArray()
 }
+
+@Suppress("unused")
+@Mojo(name = "cb")
+class CBMojo : CreateBaselineMojo()
