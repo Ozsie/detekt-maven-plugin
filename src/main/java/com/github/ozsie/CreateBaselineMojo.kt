@@ -9,10 +9,8 @@ import org.apache.maven.plugins.annotations.*
 import java.io.File
 
 @Suppress("unused")
-@Mojo(name = "check", defaultPhase = LifecyclePhase.VERIFY,
-        requiresDependencyCollection = ResolutionScope.TEST,
-        requiresDependencyResolution = ResolutionScope.TEST)
-class DetektMojo : AbstractMojo() {
+@Mojo(name = "create-baseline")
+class CreateBaselineMojo : AbstractMojo() {
     @Parameter(property = "detekt.baseline", defaultValue = "")
     private var baseline = ""
 
@@ -64,8 +62,7 @@ class DetektMojo : AbstractMojo() {
     }
 
     private fun buildCLIString() = ArrayList<String>().apply {
-        useIf(help, HELP)
-                .useIf(debug, DEBUG)
+        useIf(debug, DEBUG)
                 .useIf(disableDefaultRuleSets, DISABLE_DEFAULT_RULE_SET)
                 .useIf(parallel, PARALLEL)
                 .useIf(baseline.isNotEmpty(), BASELINE, baseline)
@@ -75,50 +72,7 @@ class DetektMojo : AbstractMojo() {
                 .useIf(input.isNotEmpty(), INPUT, input)
                 .useIf(output.isNotEmpty(), OUTPUT, output)
                 .useIf(outputName.isNotEmpty(), OUTPUT_NAME, outputName)
-                .useIf(plugins.isNotEmpty(), PLUGINS, buildPluginPaths())
+                .useIf(plugins.isNotEmpty(), PLUGINS, buildPluginPaths(mavenProject, localRepoLocation, plugins))
+                .add(CREATE_BASELINE)
     }.also { log.info("Args: $it") }.toTypedArray()
-
-    private fun buildPluginPaths() = StringBuilder().apply {
-        val mvnPlugin = mavenProject?.getPlugin("com.github.ozsie:detekt-maven-plugin")
-        plugins.forEach { plugin ->
-            if (File(plugin).exists()) {
-                append(plugin).append(";")
-            } else {
-                mvnPlugin?.dependencies
-                        ?.filter { plugin == "${it.groupId}:${it.artifactId}" }
-                        ?.forEach {
-                    val path = localRepoLocation +
-                            "/" + it.groupId.replace(".", "/") +
-                            "/" + it.artifactId +
-                            "/" + it.version +
-                            "/" + "${it.artifactId}-${it.version}.jar"
-
-                    append(path).append(";")
-                }
-            }
-        }
-    }.toString().removeSuffix(";")
 }
-
-fun <T> ArrayList<T>.useIf(w: Boolean, vararg value: T) = apply { if (w) addAll(value) }
-
-fun buildPluginPaths(mavenProject: MavenProject?, localRepoLocation: String, plugins: ArrayList<String>) = StringBuilder().apply {
-    val mvnPlugin = mavenProject?.getPlugin("com.github.ozsie:detekt-maven-plugin")
-    plugins.forEach { plugin ->
-        if (File(plugin).exists()) {
-            append(plugin).append(";")
-        } else {
-            mvnPlugin?.dependencies
-                    ?.filter { plugin == "${it.groupId}:${it.artifactId}" }
-                    ?.forEach {
-                        val path = localRepoLocation +
-                                "/" + it.groupId.replace(".", "/") +
-                                "/" + it.artifactId +
-                                "/" + it.version +
-                                "/" + "${it.artifactId}-${it.version}.jar"
-
-                        append(path).append(";")
-                    }
-        }
-    }
-}.toString().removeSuffix(";")

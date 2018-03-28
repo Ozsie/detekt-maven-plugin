@@ -4,7 +4,7 @@
 
     <groupId>com.github.ozsie</groupId>
     <artifactId>detekt-maven-plugin</artifactId>
-    <version>1.0.0.RC6-4-SNAPSHOT</version>
+    <version>1.0.0.RC6-3-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
 
     <name>detekt-maven-plugin Maven Plugin</name>
@@ -15,9 +15,10 @@
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <kotlin.version>1.2.31</kotlin.version>
-        <detekt.version>1.0.0.RC6-4</detekt.version>
+        <detekt.version>1.0.0.RC6-3</detekt.version>
         <jcommander.version>1.72</jcommander.version>
         <snakeyaml.version>1.20</snakeyaml.version>
+        <moshi.version>1.5.0</moshi.version>
     </properties>
 
     <dependencies>
@@ -51,6 +52,16 @@
             <groupId>io.gitlab.arturbosch.detekt</groupId>
             <artifactId>detekt-cli</artifactId>
             <version>${detekt.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.moshi</groupId>
+            <artifactId>moshi</artifactId>
+            <version>${moshi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.moshi</groupId>
+            <artifactId>moshi-kotlin</artifactId>
+            <version>${moshi.version}</version>
         </dependency>
 
         <dependency>
