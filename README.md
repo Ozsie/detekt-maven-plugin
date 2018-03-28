@@ -2,17 +2,16 @@
 A maven plugin that wraps the Detekt CLI. It supports the same parameters as the Detekt CLI.
 
 ## How to use
-**Basic configuration**
+### Basic configuration
 ```xml
 <build>
     <plugin>
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>1.0.0.RC6-4</version>
             <executions>
                 <execution>
-                    <id>detekt</id>
                     <phase>verify</phase>
                     <goals><goal>detekt</goal></goals>
                 </execution>
@@ -34,4 +33,37 @@ A maven plugin that wraps the Detekt CLI. It supports the same parameters as the
 ```
 Using the above configuration, Detekt will scan source files in _${basedir}/src_ and output the results in _${basedir}/detekt_.
 
-All parameters available to Detekt version _1.0.0.RC6_3_ can be configured in the plugin
+All parameters available to Detekt version _1.0.0.RC6_3_ can be configured in the plugin.
+
+### Goals
+***check***
+
+Used to run detekt. All cli parameters, excluding -gc and -cb, are available using -Ddetekt.{parameter}
+
+_Examples_
+
+ * `mvn detekt:check -Ddetekt.config=detekt.yml`
+ * `mvn detekt:check -Ddetekt.debug=true`
+
+***create-baseline***
+
+Used to create a baseline. All cli parameters, excluding -gc and -cb, are available using -Ddetekt.{parameter}
+
+_Examples_
+
+ * `mvn detekt:cb -Ddetekt.config=detekt.yml`
+ * `mvn detekt:cb -Ddetekt.debug=true`
+ * `mvn detekt:create-baseline -Ddetekt.config=detekt.yml`
+ * `mvn detekt:create-baseline -Ddetekt.debug=true`
+
+***generate-config***
+
+Used to generate a default configuration file
+
+_Example_
+
+ * `mvn detekt:gc`
+ * `mvn detekt:generate-config`
+ 
+ For more information on Detekt, have a look at https://github.com/arturbosch/detekt
+ 
