@@ -11,5 +11,5 @@ import java.io.File
 @Suppress("unused")
 @Mojo(name = "generate-config")
 class GenerateConfigMojo : AbstractMojo() {
-    override fun execute() { ConfigExporter().execute() }
+    override fun execute() = ConfigExporter().execute()
 }

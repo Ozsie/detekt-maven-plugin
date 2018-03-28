@@ -1,22 +1,21 @@
 package com.github.ozsie
 
-import io.gitlab.arturbosch.detekt.cli.ConfigExporter
 import io.gitlab.arturbosch.detekt.cli.Runner
 import io.gitlab.arturbosch.detekt.cli.parseArguments
-import org.apache.maven.plugin.AbstractMojo
-import org.apache.maven.project.MavenProject
 import org.apache.maven.plugins.annotations.*
-import java.io.File
 
 @Suppress("unused")
-@Mojo(name = "create-baseline")
-class CreateBaselineMojo : DetektMojo() {
+@Mojo(name = "check", defaultPhase = LifecyclePhase.VERIFY,
+        requiresDependencyCollection = ResolutionScope.TEST,
+        requiresDependencyResolution = ResolutionScope.TEST)
+class CheckMojo : DetektMojo() {
 
     override fun execute() = Runner(parseArguments(cliString)).execute()
 
-    private val cliString
+    private val cliString: Array<String>
         get() = ArrayList<String>().apply {
-                useIf(debug, DEBUG)
+                useIf(help, HELP)
+                    .useIf(debug, DEBUG)
                     .useIf(disableDefaultRuleSets, DISABLE_DEFAULT_RULE_SET)
                     .useIf(parallel, PARALLEL)
                     .useIf(baseline.isNotEmpty(), BASELINE, baseline)
@@ -27,6 +26,5 @@ class CreateBaselineMojo : DetektMojo() {
                     .useIf(output.isNotEmpty(), OUTPUT, output)
                     .useIf(outputName.isNotEmpty(), OUTPUT_NAME, outputName)
                     .useIf(plugins.isNotEmpty(), PLUGINS, plugins.buildPluginPaths(mavenProject, localRepoLocation))
-                    .add(CREATE_BASELINE)
             }.log().toTypedArray()
 }
