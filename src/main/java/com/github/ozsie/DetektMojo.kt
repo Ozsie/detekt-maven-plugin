@@ -64,7 +64,8 @@ abstract class DetektMojo : AbstractMojo() {
 
     fun <T> ArrayList<T>.useIf(w: Boolean, vararg value: T) = apply { if (w) addAll(value) }
 
-    fun ArrayList<String>.buildPluginPaths(mavenProject: MavenProject?, localRepoLocation: String) = StringBuilder().apply {
+    fun ArrayList<String>.buildPluginPaths(mavenProject: MavenProject?,
+                                           localRepoLocation: String) = StringBuilder().apply {
         val mvnPlugin = mavenProject?.getPlugin("com.github.ozsie:detekt-maven-plugin")
         this@buildPluginPaths.forEach { plugin ->
             if (File(plugin).exists()) {
