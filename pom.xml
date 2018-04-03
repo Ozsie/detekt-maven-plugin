@@ -4,7 +4,7 @@
 
     <groupId>com.github.ozsie</groupId>
     <artifactId>detekt-maven-plugin</artifactId>
-    <version>1.0.0.RC6-4-SNAPSHOT</version>
+    <version>1.0.0.RC6-5-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
 
     <name>detekt-maven-plugin Maven Plugin</name>
@@ -127,6 +127,22 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>com.github.ozsie</groupId>
+                <artifactId>detekt-maven-plugin</artifactId>
+                <version>1.0.0.RC6-4</version>
+                <executions>
+                    <execution>
+                        <phase>verify</phase>
+                        <goals><goal>check</goal></goals>
+                        <configuration>
+                            <filters>
+                                <filter>.*test.*</filter>
+                            </filters>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
@@ -144,6 +160,14 @@
                 <enabled>false</enabled>
                 <updatePolicy>never</updatePolicy>
             </snapshots>
+        </pluginRepository>
+        <pluginRepository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>bintray-ozsie-maven</id>
+            <name>bintray-plugins</name>
+            <url>https://dl.bintray.com/ozsie/maven</url>
         </pluginRepository>
     </pluginRepositories>
 
