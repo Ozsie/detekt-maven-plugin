@@ -2,7 +2,7 @@ package com.github.ozsie
 
 import io.gitlab.arturbosch.detekt.cli.Runner
 import io.gitlab.arturbosch.detekt.cli.parseArguments
-import org.apache.maven.plugins.annotations.*
+import org.apache.maven.plugins.annotations.Mojo
 
 @Suppress("unused")
 @Mojo(name = "create-baseline")
