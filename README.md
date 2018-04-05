@@ -13,7 +13,7 @@ A maven plugin that wraps the Detekt CLI. It supports the same parameters as the
             <executions>
                 <execution>
                     <phase>verify</phase>
-                    <goals><goal>detekt</goal></goals>
+                    <goals><goal>check</goal></goals>
                 </execution>
             </executions>
         </plugin>
