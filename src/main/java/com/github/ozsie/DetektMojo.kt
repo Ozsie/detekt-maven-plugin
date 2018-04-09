@@ -1,11 +1,12 @@
 package com.github.ozsie
 
+import org.apache.maven.model.Dependency
+import org.apache.maven.model.Plugin
 import org.apache.maven.plugin.AbstractMojo
 import org.apache.maven.plugins.annotations.Parameter
 import org.apache.maven.project.MavenProject
 import java.io.File
 
-const val HELP = "-h"
 const val CREATE_BASELINE = "-cb"
 const val DEBUG = "--debug"
 const val DISABLE_DEFAULT_RULE_SET = "-dd"
@@ -18,6 +19,12 @@ const val INPUT = "-i"
 const val OUTPUT = "-o"
 const val OUTPUT_NAME = "-on"
 const val PLUGINS = "-p"
+
+const val MDP_ID = "com.github.ozsie:detekt-maven-plugin"
+
+const val DOT = "."
+const val SLASH = "/"
+const val SEMICOLON = ";"
 
 abstract class DetektMojo : AbstractMojo() {
     @Parameter(property = "detekt.baseline", defaultValue = "")
@@ -62,33 +69,52 @@ abstract class DetektMojo : AbstractMojo() {
     @Parameter(defaultValue = "\${settings.localRepository}", readonly = true)
     var localRepoLocation = "\${settings.localRepository}"
 
-    fun <T> ArrayList<T>.useIf(w: Boolean, vararg value: T) = apply { if (w) addAll(value) }
+    internal fun getCliSting() = ArrayList<String>().apply {
+        useIf(debug, DEBUG)
+                .useIf(disableDefaultRuleSets, DISABLE_DEFAULT_RULE_SET)
+                .useIf(parallel, PARALLEL)
+                .useIf(baseline.isNotEmpty(), BASELINE, baseline)
+                .useIf(config.isNotEmpty(), CONFIG, config)
+                .useIf(configResource.isNotEmpty(), CONFIG_RESOURCE, configResource)
+                .useIf(filters.isNotEmpty(), FILTERS, filters.joinToString(SEMICOLON))
+                .useIf(input.isNotEmpty(), INPUT, input)
+                .useIf(output.isNotEmpty(), OUTPUT, output)
+                .useIf(outputName.isNotEmpty(), OUTPUT_NAME, outputName)
+                .useIf(plugins.isNotEmpty(), PLUGINS, plugins.buildPluginPaths(mavenProject, localRepoLocation))
+    }
 
-    fun ArrayList<String>.buildPluginPaths(mavenProject: MavenProject?,
-                                           localRepoLocation: String) = StringBuilder().apply {
-        val mvnPlugin = mavenProject?.getPlugin("com.github.ozsie:detekt-maven-plugin")
-        this@buildPluginPaths.forEach { plugin ->
-            if (File(plugin).exists()) {
-                append(plugin).append(";")
-            } else {
-                mvnPlugin?.dependencies
-                        ?.filter { plugin == "${it.groupId}:${it.artifactId}" }
-                        ?.forEach {
-                            val path = localRepoLocation +
-                                    "/" + it.groupId.replace(".", "/") +
-                                    "/" + it.artifactId +
-                                    "/" + it.version +
-                                    "/" + "${it.artifactId}-${it.version}.jar"
-
-                            append(path).append(";")
-                        }
-            }
+    internal fun <T> ArrayList<T>.log(): ArrayList<T> = apply {
+        StringBuilder().apply {
+            forEach { append(it).append(" ") }
+            log.info("Args: $this".trim())
         }
-    }.toString().removeSuffix(";")
-
-    fun <T> ArrayList<T>.log(): ArrayList<T> = apply {
-        val sb = StringBuilder()
-        forEach { sb.append(it).append(" ") }
-        log.info("Args: $sb".trim())
     }
 }
+
+internal fun <T> ArrayList<T>.useIf(w: Boolean, vararg value: T) = apply { if (w) addAll(value) }
+
+internal fun ArrayList<String>.buildPluginPaths(mavenProject: MavenProject?, localRepoLocation: String) =
+        StringBuilder().apply {
+            mavenProject?.let {
+                this.buildPluginPaths(this@buildPluginPaths, it.getPlugin(MDP_ID), localRepoLocation)
+            }
+        }.toString().removeSuffix(SEMICOLON)
+
+internal fun StringBuilder.buildPluginPaths(plugins: ArrayList<String>, mdp: Plugin, root: String) {
+    plugins.forEach { plugin ->
+        if (File(plugin).exists()) {
+            append(plugin).append(SEMICOLON)
+        } else {
+            mdp.dependencies
+                    ?.filter { plugin == it.getIdentifier() }
+                    ?.forEach { append(it asPath root).append(SEMICOLON) }
+        }
+    }
+}
+
+internal infix fun Dependency.asPath(root: String) =
+        "$root/${groupId.asPath()}/$artifactId/$version/$artifactId-$version.jar"
+
+internal fun Dependency.getIdentifier() = "$groupId:$artifactId"
+
+internal fun String.asPath() = replace(DOT, SLASH)
