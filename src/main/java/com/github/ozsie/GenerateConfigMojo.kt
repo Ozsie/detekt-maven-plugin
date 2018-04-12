@@ -10,6 +10,4 @@ open class GenerateConfigMojo : AbstractMojo() {
     override fun execute() = ConfigExporter().execute()
 }
 
-@Suppress("unused")
-@Mojo(name = "gc")
-class GCMojo : GenerateConfigMojo()
+@Suppress("unused") @Mojo(name = "gc") class GCMojo : GenerateConfigMojo()
