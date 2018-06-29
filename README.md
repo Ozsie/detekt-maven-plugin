@@ -5,7 +5,7 @@ A maven plugin that wraps the Detekt CLI. It supports the same parameters as the
 ### Basic configuration
 ```xml
 <build>
-    <plugin>
+    <plugins>
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
@@ -17,7 +17,7 @@ A maven plugin that wraps the Detekt CLI. It supports the same parameters as the
                 </execution>
             </executions>
         </plugin>
-    </plugin>
+    </plugins>
 </build>
 
 <pluginRepositories>
