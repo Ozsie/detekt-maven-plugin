@@ -1,6 +1,6 @@
 package com.github.ozsie
 
-import io.gitlab.arturbosch.detekt.cli.ConfigExporter
+import io.gitlab.arturbosch.detekt.cli.runners.ConfigExporter
 import org.apache.maven.plugin.AbstractMojo
 import org.apache.maven.plugins.annotations.Mojo
 
