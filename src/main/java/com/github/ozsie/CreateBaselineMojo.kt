@@ -1,7 +1,7 @@
 package com.github.ozsie
 
-import io.gitlab.arturbosch.detekt.cli.Runner
 import io.gitlab.arturbosch.detekt.cli.parseArguments
+import io.gitlab.arturbosch.detekt.cli.runners.Runner
 import org.apache.maven.plugins.annotations.Mojo
 
 
