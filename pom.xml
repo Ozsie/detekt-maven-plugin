@@ -14,7 +14,7 @@
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <kotlin.version>1.2.50</kotlin.version>
+        <kotlin.version>1.2.60</kotlin.version>
         <detekt.version>1.0.0.RC8</detekt.version>
         <jcommander.version>1.72</jcommander.version>
         <snakeyaml.version>1.21</snakeyaml.version>
