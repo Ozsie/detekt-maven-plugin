@@ -17,7 +17,7 @@
         <kotlin.version>1.2.50</kotlin.version>
         <detekt.version>1.0.0.RC8</detekt.version>
         <jcommander.version>1.72</jcommander.version>
-        <snakeyaml.version>1.20</snakeyaml.version>
+        <snakeyaml.version>1.21</snakeyaml.version>
     </properties>
 
     <dependencies>
