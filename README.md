@@ -1,5 +1,4 @@
 # Detekt Maven Plugin
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FOzsie%2Fdetekt-maven-plugin.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FOzsie%2Fdetekt-maven-plugin?ref=badge_shield)
 
 A maven plugin that wraps the Detekt CLI. It supports the same parameters as the Detekt CLI.
 
