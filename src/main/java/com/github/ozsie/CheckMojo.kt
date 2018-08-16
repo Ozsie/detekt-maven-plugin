@@ -7,7 +7,10 @@ import org.apache.maven.plugins.annotations.Mojo
 import org.apache.maven.plugins.annotations.ResolutionScope
 
 @Suppress("unused")
-@Mojo(name = "check", defaultPhase = LifecyclePhase.VERIFY, requiresDependencyCollection = ResolutionScope.TEST, requiresDependencyResolution = ResolutionScope.TEST)
+@Mojo(name = "check",
+        defaultPhase = LifecyclePhase.VERIFY,
+        requiresDependencyCollection = ResolutionScope.TEST,
+        requiresDependencyResolution = ResolutionScope.TEST)
 class CheckMojo : DetektMojo() {
     override fun execute() = Runner(parseArguments(getCliSting().log().toTypedArray())).execute()
 }
