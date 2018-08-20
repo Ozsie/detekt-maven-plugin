@@ -155,7 +155,7 @@
             <plugin>
                 <groupId>com.github.ozsie</groupId>
                 <artifactId>detekt-maven-plugin</artifactId>
-                <version>1.0.0.RC6-4</version>
+                <version>1.0.0.RC8</version>
                 <executions>
                     <execution>
                         <phase>verify</phase>
