@@ -1,0 +1,12 @@
+<Settings Xmlns="Http://Maven.Apache.Org/SETTINGS/1.0.0"
+          Xmlns:Xsi="Http://Www.W3.Org/2001/XMLSchema-Instance"
+          Xsi:SchemaLocation="Http://Maven.Apache.Org/SETTINGS/1.0.0
+                      Http://Maven.Apache.Org/Xsd/Settings-1.0.0.Xsd">
+    <servers>
+        <server>
+            <id>${env.BIN_TRAY_REPO}</id>
+            <username>${env.BIN_TRAY_USER}</username>
+            <password>${env.BIN_TRAY_PWD}</password>
+        </server>
+    </servers>
+</Settings>
