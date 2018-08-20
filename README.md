@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/Ozsie/detekt-maven-plugin.svg?branch=master)](https://travis-ci.org/Ozsie/detekt-maven-plugin)
-[![Coverage Status](https://coveralls.io/repos/github/Ozsie/detekt-maven-plugin/badge.svg?branch=master)](https://coveralls.io/github/Ozsie/detekt-maven-plugin?branch=master)
+[![codecov](https://codecov.io/gh/Ozsie/detekt-maven-plugin/branch/master/graph/badge.svg)](https://codecov.io/gh/Ozsie/detekt-maven-plugin)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FOzsie%2Fdetekt-maven-plugin.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FOzsie%2Fdetekt-maven-plugin?ref=badge_shield)
 
 # Detekt Maven Plugin
