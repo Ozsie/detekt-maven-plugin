@@ -12,5 +12,7 @@ import org.apache.maven.plugins.annotations.ResolutionScope
         requiresDependencyCollection = ResolutionScope.TEST,
         requiresDependencyResolution = ResolutionScope.TEST)
 class CheckMojo : DetektMojo() {
-    override fun execute() = Runner(parseArguments(getCliSting().log().toTypedArray())).execute()
+    override fun execute() {
+        if (!skip) return Runner(parseArguments(getCliSting().log().toTypedArray())).execute()
+    }
 }
