@@ -1,9 +1,4 @@
-[![Build Status](https://travis-ci.org/Ozsie/detekt-maven-plugin.svg?branch=master)](https://travis-ci.org/Ozsie/detekt-maven-plugin)
-[![codecov](https://codecov.io/gh/Ozsie/detekt-maven-plugin/branch/master/graph/badge.svg)](https://codecov.io/gh/Ozsie/detekt-maven-plugin)
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FOzsie%2Fdetekt-maven-plugin.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FOzsie%2Fdetekt-maven-plugin?ref=badge_shield)
-
 # Detekt Maven Plugin
-
 A maven plugin that wraps the Detekt CLI. It supports the same parameters as the Detekt CLI.
 
 ## How to use
@@ -24,7 +19,8 @@ A maven plugin that wraps the Detekt CLI. It supports the same parameters as the
         </plugin>
     </plugins>
 </build>
-
+```
+```xml
 <pluginRepositories>
     <pluginRepository>
         <snapshots>
@@ -37,6 +33,18 @@ A maven plugin that wraps the Detekt CLI. It supports the same parameters as the
 </pluginRepositories>
 ```
 Using the above configuration, Detekt will scan source files in _${basedir}/src_ and output the results in _${basedir}/detekt_.
+
+You may want to skip detekt checks in a submodule, to do this add the plugin to the submodule as below
+```xml
+<plugin>
+    <groupId>com.github.ozsie</groupId>
+    <artifactId>detekt-maven-plugin</artifactId>
+    <configuration>
+        <skip>true</skip>
+    </configuration>
+</plugin>
+```
+This will make the plugin silently skip execution.
 
 All parameters available to Detekt version _1.0.0.RC8_ can be configured in the plugin.
 
@@ -72,7 +80,3 @@ _Example_
  
  For more information on Detekt, have a look at https://github.com/arturbosch/detekt
  
-
-
-## License
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FOzsie%2Fdetekt-maven-plugin.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FOzsie%2Fdetekt-maven-plugin?ref=badge_large)
