@@ -27,6 +27,10 @@ const val SLASH = "/"
 const val SEMICOLON = ";"
 
 abstract class DetektMojo : AbstractMojo() {
+
+    @Parameter(defaultValue = "false")
+    var skip = false
+
     @Parameter(property = "detekt.baseline", defaultValue = "")
     var baseline = ""
 
