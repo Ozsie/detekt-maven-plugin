@@ -6,8 +6,10 @@ import org.apache.maven.plugins.annotations.Mojo
 
 @Suppress("unused")
 @Mojo(name = "generate-config")
-open class GenerateConfigMojo : AbstractMojo() {
-    override fun execute() = ConfigExporter().execute()
+open class GenerateConfigMojo : DetektMojo() {
+    override fun execute() = ConfigExporter().run {
+        if (!skip) return execute()
+    }
 }
 
 @Suppress("unused") @Mojo(name = "gc") class GCMojo : GenerateConfigMojo()
