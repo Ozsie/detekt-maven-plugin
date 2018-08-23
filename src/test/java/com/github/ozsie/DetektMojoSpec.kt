@@ -1,7 +1,12 @@
 package com.github.ozsie
 
+import com.nhaarman.mockito_kotlin.any
+import com.nhaarman.mockito_kotlin.doReturn
+import com.nhaarman.mockito_kotlin.mock
 import org.apache.maven.model.Dependency
 import org.apache.maven.model.Plugin
+import org.apache.maven.plugin.logging.Log
+import org.apache.maven.project.MavenProject
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.given
 import org.jetbrains.spek.api.dsl.on
@@ -66,6 +71,42 @@ object DetektMojoSpec : Spek({
             val path = groupId.asPath()
             test(". should be replaced by / in path") {
                 assertEquals("x/y/z", path)
+            }
+        }
+    }
+
+    given("an ArrayList<String>") {
+        val mavenProject: MavenProject = mock {
+            on {
+                getPlugin(any())
+            } doReturn (
+                Plugin().apply {
+                    dependencies = mutableListOf(Dependency().apply {
+                        groupId = "a.b"
+                        artifactId = "b"
+                        version = "1"
+                    })
+                }
+            )
+        }
+
+
+        val stringList = arrayListOf("x.y:y", "a.b:b", "c.d:d")
+        on("buildPluginPaths") {
+            val pluginPath = stringList.buildPluginPaths(mavenProject, "~/.m2")
+            test("StringBuilder.buildPLuginPaths should be called") {
+                assertEquals("~/.m2/a/b/b/1/b-1.jar", pluginPath)
+            }
+        }
+    }
+
+    given("an ArrayList<T>") {
+        val log: Log = mock {}
+        val stringList = arrayListOf("x.y:y", "a.b:b", "c.d:d")
+        on("log") {
+            val listAfterLog = stringList.log(log)
+            test("list should not be modified") {
+                assertEquals(stringList, listAfterLog)
             }
         }
     }
