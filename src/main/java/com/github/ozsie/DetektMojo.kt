@@ -3,6 +3,7 @@ package com.github.ozsie
 import org.apache.maven.model.Dependency
 import org.apache.maven.model.Plugin
 import org.apache.maven.plugin.AbstractMojo
+import org.apache.maven.plugin.logging.Log
 import org.apache.maven.plugins.annotations.Parameter
 import org.apache.maven.project.MavenProject
 import java.io.File
@@ -87,11 +88,13 @@ abstract class DetektMojo : AbstractMojo() {
                 .useIf(plugins.isNotEmpty(), PLUGINS, plugins.buildPluginPaths(mavenProject, localRepoLocation))
     }
 
-    internal fun <T> ArrayList<T>.log(): ArrayList<T> = apply {
-        StringBuilder().apply {
-            forEach { append(it).append(" ") }
-            log.info("Args: $this".trim())
-        }
+    internal fun <T> ArrayList<T>.log(): ArrayList<T> = log(this@DetektMojo.log)
+}
+
+internal fun <T> ArrayList<T>.log(log: Log): ArrayList<T> = apply {
+    StringBuilder().apply {
+        forEach { append(it).append(" ") }
+        log.info("Args: $this".trim())
     }
 }
 
