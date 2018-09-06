@@ -5,11 +5,16 @@
     "subject": "ozsie"
   },
   "version": {
-    "name": "1.0.0.RC8-1-SNAPSHOT"
+    "name": "1.0.0.RC8-1-SNAPSHOT",
+    "desc": "Snapshot version 1.0.0.RC8-1",
+    "released": "2018-09-06",
+    "vcs_tag": "1.0.0.RC8-1-SNAPSHOT",
+    "attributes": [],
+    "gpgSign": false
   },
   "files":
   [
-    {"includePattern": "target/.*.jar", "uploadPattern": "/$1"}
+    {"includePattern": "target/detekt-maven-plugin*.jar", "uploadPattern": "/$1"}
   ],
   "publish": true
 }
