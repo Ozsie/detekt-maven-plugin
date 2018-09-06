@@ -16,10 +16,7 @@
   [
     {
       "includePattern": "target/(detekt-maven-plugin-*.jar)",
-      "uploadPattern": "/$1",
-      "matrixParams": {
-        "override": 1
-      }
+      "uploadPattern": "/$1"
     }
   ],
   "publish": true
