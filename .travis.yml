@@ -9,3 +9,5 @@ deploy:
   user: ${env.BIN_TRAY_USER}
   key: ${env.BIN_TRAY_PWD}
   dry-run: true
+  on:
+    branch: all
