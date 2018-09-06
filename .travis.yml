@@ -6,8 +6,8 @@ after_success:
 deploy:
   provider: bintray
   file: "descriptor.json"
-  user: ${env.BIN_TRAY_USER}
-  key: ${env.BIN_TRAY_PWD}
-  dry-run: true
+  user: $BIN_TRAY_USER
+  key: $BIN_TRAY_PWD
+  dry-run: false
   on:
     all_branches: true
