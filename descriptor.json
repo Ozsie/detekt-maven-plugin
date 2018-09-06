@@ -5,10 +5,10 @@
     "subject": "ozsie"
   },
   "version": {
-    "name": "1.0.0.RC8-1-SNAPSHOT",
+    "name": "1.0.0.RC8-1-S",
     "desc": "Snapshot version 1.0.0.RC8-1",
     "released": "2018-09-06",
-    "vcs_tag": "1.0.0.RC8-1-SNAPSHOT",
+    "vcs_tag": "1.0.0.RC8-1-S",
     "attributes": [],
     "gpgSign": false
   },
