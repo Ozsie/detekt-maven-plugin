@@ -14,7 +14,7 @@
   },
   "files":
   [
-    {"includePattern": "target/detekt-maven-plugin*.jar", "uploadPattern": "/$1"}
+    {"includePattern": "\./target/detekt-maven-plugin*.jar", "uploadPattern": "/$1"}
   ],
   "publish": true
 }
