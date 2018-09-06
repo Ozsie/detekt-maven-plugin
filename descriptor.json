@@ -1,0 +1,15 @@
+{
+  "package": {
+    "name": "detekt-maven-plugin",
+    "repo": "maven",
+    "subject": "Ozsie"
+  },
+  "version": {
+    "name": "1.0.0.RC8-1-SNAPSHOT"
+  },
+  "files":
+  [
+    {"includePattern": "target/.*.jar", "uploadPattern": "/$1"}
+  ],
+  "publish": true
+}
