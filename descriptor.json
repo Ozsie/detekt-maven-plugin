@@ -2,7 +2,7 @@
   "package": {
     "name": "detekt-maven-plugin",
     "repo": "maven",
-    "subject": "Ozsie"
+    "subject": "ozsie"
   },
   "version": {
     "name": "1.0.0.RC8-1-SNAPSHOT"
