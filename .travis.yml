@@ -10,4 +10,4 @@ deploy:
   key: ${env.BIN_TRAY_PWD}
   dry-run: true
   on:
-    branch: all
+    all_branches: true
