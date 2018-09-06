@@ -2,4 +2,12 @@ language: java
 
 after_success:
 - bash <(curl -s https://codecov.io/bash)
-- bash deploy.sh
+
+deploy:
+  provider: bintray
+  file: "descriptor.json"
+  user: $BIN_TRAY_USER
+  key: $BIN_TRAY_PWD
+  dry-run: false
+  on:
+    all_branches: true
