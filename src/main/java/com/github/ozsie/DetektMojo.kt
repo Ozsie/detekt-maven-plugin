@@ -17,9 +17,10 @@ const val CONFIG = "-c"
 const val CONFIG_RESOURCE = "-cr"
 const val FILTERS = "-f"
 const val INPUT = "-i"
-const val OUTPUT = "-o"
-const val OUTPUT_NAME = "-on"
 const val PLUGINS = "-p"
+const val PRINT_AST = "--print-ast"
+const val RUN_RULE = "--run-rule"
+const val REPORT = "-r"
 
 const val MDP_ID = "com.github.ozsie:detekt-maven-plugin"
 
@@ -56,14 +57,17 @@ abstract class DetektMojo : AbstractMojo() {
     @Parameter(property = "detekt.input", defaultValue = "\${basedir}/src")
     var input = "\${basedir}/src"
 
-    @Parameter(property = "detekt.output", defaultValue = "\${basedir}/detekt")
-    var output = "\${basedir}/detekt"
-
-    @Parameter(property = "detekt.output-name", defaultValue = "")
-    var outputName = ""
-
     @Parameter(property = "detekt.parallel", defaultValue = "false")
     var parallel = false
+
+    @Parameter(property = "detekt.printAst", defaultValue = "false")
+    var printAst = false
+
+    @Parameter(property = "detekt.disableDefaultRuleset", defaultValue = "false")
+    var disableDefaultRuleset = false
+
+    @Parameter(property = "detekt.runRule", defaultValue = "")
+    var runRule = ""
 
     @Parameter(property = "detekt.plugins")
     var plugins = ArrayList<String>()
@@ -83,8 +87,9 @@ abstract class DetektMojo : AbstractMojo() {
                 .useIf(configResource.isNotEmpty(), CONFIG_RESOURCE, configResource)
                 .useIf(filters.isNotEmpty(), FILTERS, filters.joinToString(SEMICOLON))
                 .useIf(input.isNotEmpty(), INPUT, input)
-                .useIf(output.isNotEmpty(), OUTPUT, output)
-                .useIf(outputName.isNotEmpty(), OUTPUT_NAME, outputName)
+                .useIf(runRule.isNotEmpty(), RUN_RULE, runRule)
+                .useIf(printAst, PRINT_AST)
+                .useIf(disableDefaultRuleset, DISABLE_DEFAULT_RULE_SET)
                 .useIf(plugins.isNotEmpty(), PLUGINS, plugins.buildPluginPaths(mavenProject, localRepoLocation))
     }
 

@@ -1,5 +1,6 @@
 package com.github.ozsie
 
+import io.gitlab.arturbosch.detekt.cli.CliArgs
 import io.gitlab.arturbosch.detekt.cli.parseArguments
 import io.gitlab.arturbosch.detekt.cli.runners.Runner
 import org.apache.maven.plugins.annotations.Mojo
@@ -8,7 +9,8 @@ import org.apache.maven.plugins.annotations.Mojo
 @Mojo(name = "create-baseline")
 open class CreateBaselineMojo : DetektMojo() {
     override fun execute() {
-        if (!skip) Runner(parseArguments(cliString)).execute()
+        val cliArgs = parseArguments<CliArgs>(cliString).first
+        if (!skip) Runner(cliArgs).execute()
     }
     private val cliString get() = getCliSting().apply { add(CREATE_BASELINE) }.log().toTypedArray()
 }

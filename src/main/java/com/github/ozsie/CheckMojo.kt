@@ -1,5 +1,6 @@
 package com.github.ozsie
 
+import io.gitlab.arturbosch.detekt.cli.CliArgs
 import io.gitlab.arturbosch.detekt.cli.parseArguments
 import io.gitlab.arturbosch.detekt.cli.runners.Runner
 import org.apache.maven.plugins.annotations.LifecyclePhase
@@ -13,6 +14,7 @@ import org.apache.maven.plugins.annotations.ResolutionScope
         requiresDependencyResolution = ResolutionScope.TEST)
 class CheckMojo : DetektMojo() {
     override fun execute() {
-        if (!skip) return Runner(parseArguments(getCliSting().log().toTypedArray())).execute()
+        val cliArgs = parseArguments<CliArgs>(getCliSting().log().toTypedArray()).first
+        if (!skip) return Runner(cliArgs).execute()
     }
 }
