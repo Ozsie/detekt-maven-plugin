@@ -16,7 +16,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <kotlin.version>1.2.70</kotlin.version>
         <detekt.version>1.0.0.RC9</detekt.version>
-        <detekt.maven.version>1.0.0.RC9</detekt.maven.version>
+        <detekt.maven.version>1.0.0.RC8</detekt.maven.version>
         <jcommander.version>1.72</jcommander.version>
         <snakeyaml.version>1.21</snakeyaml.version>
     </properties>
