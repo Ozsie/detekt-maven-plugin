@@ -4,7 +4,7 @@
 
     <groupId>com.github.ozsie</groupId>
     <artifactId>detekt-maven-plugin</artifactId>
-    <version>1.0.0.RC9.2</version>
+    <version>1.0.0-RC14</version>
     <packaging>maven-plugin</packaging>
 
     <name>detekt-maven-plugin Maven Plugin</name>
@@ -14,9 +14,9 @@
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <kotlin.version>1.2.70</kotlin.version>
-        <detekt.version>1.0.0.RC9.2</detekt.version>
-        <detekt.maven.version>1.0.0.RC9</detekt.maven.version>
+        <kotlin.version>1.3.21</kotlin.version>
+        <detekt.version>1.0.0-RC14</detekt.version>
+        <detekt.maven.version>1.0.0.RC9.2</detekt.maven.version>
         <jcommander.version>1.72</jcommander.version>
         <snakeyaml.version>1.21</snakeyaml.version>
     </properties>
@@ -81,7 +81,7 @@
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-test</artifactId>
-            <version>1.2.31</version>
+	    <version>${kotlin.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -139,7 +139,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-plugin-plugin</artifactId>
-                <version>3.4</version>
+                <version>3.6.0</version>
                 <configuration>
                     <goalPrefix>detekt</goalPrefix>
                     <skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
@@ -263,6 +263,10 @@
                 <enabled>false</enabled>
                 <updatePolicy>never</updatePolicy>
             </snapshots>
+        </repository>
+        <repository>
+            <id>jcenter</id>
+            <url>https://jcenter.bintray.com/</url>
         </repository>
     </repositories>
 
