@@ -6,6 +6,8 @@ import io.gitlab.arturbosch.detekt.cli.runners.Runner
 import org.apache.maven.plugins.annotations.LifecyclePhase
 import org.apache.maven.plugins.annotations.Mojo
 import org.apache.maven.plugins.annotations.ResolutionScope
+import java.nio.file.Files
+import java.nio.file.Paths
 
 @Suppress("unused")
 @Mojo(name = "check",
@@ -15,6 +17,9 @@ import org.apache.maven.plugins.annotations.ResolutionScope
 class CheckMojo : DetektMojo() {
     override fun execute() {
         val cliArgs = parseArguments<CliArgs>(getCliSting().log().toTypedArray()).first
+        if (mavenProject?.basedir != null) {
+            skip = !Files.isDirectory(Paths.get("${mavenProject?.basedir}/src"))
+        }
         if (!skip) return Runner(cliArgs).execute()
     }
 }
