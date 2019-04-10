@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/Ozsie/detekt-maven-plugin.svg?branch=master)](https://travis-ci.org/Ozsie/detekt-maven-plugin)
 [![codecov](https://codecov.io/gh/Ozsie/detekt-maven-plugin/branch/master/graph/badge.svg)](https://codecov.io/gh/Ozsie/detekt-maven-plugin)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FOzsie%2Fdetekt-maven-plugin.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FOzsie%2Fdetekt-maven-plugin?ref=badge_shield)
-[![Download](https://api.bintray.com/packages/ozsie/maven/detekt-maven-plugin/images/download.svg)](https://bintray.com/ozsie/maven/detekt-maven-plugin/_latestVersion)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.ozise/detekt-maven-plugin/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.ozsie/detekt-maven-plugin)
 
 # Detekt Maven Plugin
 
@@ -25,21 +25,10 @@ A maven plugin that wraps the Detekt CLI. It supports the same parameters as the
         </plugin>
     </plugins>
 </build>
-
-<pluginRepositories>
-    <pluginRepository>
-        <snapshots>
-            <enabled>false</enabled>
-        </snapshots>
-        <id>bintray-ozsie-maven</id>
-        <name>bintray-plugins</name>
-        <url>https://dl.bintray.com/ozsie/maven</url>
-    </pluginRepository>
-</pluginRepositories>
 ```
 Using the above configuration, Detekt will scan source files in _${basedir}/src_ and output the results in _${basedir}/detekt_.
 
-All parameters available to Detekt version _1.0.0.RC8_ can be configured in the plugin.
+All parameters available to Detekt version _1.0.0-RC14_ can be configured in the plugin.
 
 ### Goals
 ***check***
