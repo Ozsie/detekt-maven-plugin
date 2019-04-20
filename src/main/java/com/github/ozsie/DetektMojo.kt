@@ -69,6 +69,9 @@ abstract class DetektMojo : AbstractMojo() {
     @Parameter(property = "detekt.runRule", defaultValue = "")
     var runRule = ""
 
+    @Parameter(property = "detekt.report", defaultValue = "")
+    var report = ""
+
     @Parameter(property = "detekt.plugins")
     var plugins = ArrayList<String>()
 
@@ -88,6 +91,7 @@ abstract class DetektMojo : AbstractMojo() {
                 .useIf(filters.isNotEmpty(), FILTERS, filters.joinToString(SEMICOLON))
                 .useIf(input.isNotEmpty(), INPUT, input)
                 .useIf(runRule.isNotEmpty(), RUN_RULE, runRule)
+                .useIf(report.isNotEmpty(), REPORT, report)
                 .useIf(printAst, PRINT_AST)
                 .useIf(disableDefaultRuleset, DISABLE_DEFAULT_RULE_SET)
                 .useIf(plugins.isNotEmpty(), PLUGINS, plugins.buildPluginPaths(mavenProject, localRepoLocation))
