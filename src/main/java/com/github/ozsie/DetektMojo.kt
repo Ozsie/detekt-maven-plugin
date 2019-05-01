@@ -69,8 +69,8 @@ abstract class DetektMojo : AbstractMojo() {
     @Parameter(property = "detekt.runRule", defaultValue = "")
     var runRule = ""
 
-    @Parameter(property = "detekt.report", defaultValue = "")
-    var report = ""
+    @Parameter(property = "detekt.report")
+    var report = ArrayList<String>()
 
     @Parameter(property = "detekt.plugins")
     var plugins = ArrayList<String>()
@@ -91,13 +91,20 @@ abstract class DetektMojo : AbstractMojo() {
                 .useIf(filters.isNotEmpty(), FILTERS, filters.joinToString(SEMICOLON))
                 .useIf(input.isNotEmpty(), INPUT, input)
                 .useIf(runRule.isNotEmpty(), RUN_RULE, runRule)
-                .useIf(report.isNotEmpty(), REPORT, report)
+                .useIf(report.isNotEmpty(), toArgList(report))
                 .useIf(printAst, PRINT_AST)
                 .useIf(disableDefaultRuleset, DISABLE_DEFAULT_RULE_SET)
                 .useIf(plugins.isNotEmpty(), PLUGINS, plugins.buildPluginPaths(mavenProject, localRepoLocation))
     }
 
     internal fun <T> ArrayList<T>.log(): ArrayList<T> = log(this@DetektMojo.log)
+}
+
+private fun toArgList(list: List<String>) = ArrayList<String>().apply {
+    list.forEach {
+        add(REPORT)
+        add(it)
+    }
 }
 
 internal fun <T> ArrayList<T>.log(log: Log): ArrayList<T> = apply {
@@ -108,6 +115,8 @@ internal fun <T> ArrayList<T>.log(log: Log): ArrayList<T> = apply {
 }
 
 internal fun <T> ArrayList<T>.useIf(w: Boolean, vararg value: T) = apply { if (w) addAll(value) }
+
+internal fun <T> ArrayList<T>.useIf(w: Boolean, value: List<T>) = apply { if (w) addAll(value) }
 
 internal fun ArrayList<String>.buildPluginPaths(mavenProject: MavenProject?, localRepoLocation: String) =
         StringBuilder().apply {
