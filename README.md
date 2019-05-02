@@ -30,6 +30,30 @@ Using the above configuration, Detekt will scan source files in _${basedir}/src_
 
 All parameters available to Detekt version _1.0.0-RC14_ can be configured in the plugin.
 
+##Specify report files
+```xml
+<build>
+    <plugins>
+        <plugin>
+            <groupId>com.github.ozsie</groupId>
+            <artifactId>detekt-maven-plugin</artifactId>
+            <version>1.0.0-RC14</version>
+            <executions>
+                <execution>
+                    <phase>verify</phase>
+                    <goals><goal>check</goal></goals>
+                    <configuration>
+                        <report>
+                            <report>txt:reports/detekt.txt</report>
+                            <report>xml:reports/detekt.xml</report>
+                        </report>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
+```
 ### Goals
 ***check***
 
@@ -62,7 +86,10 @@ _Example_
  
  For more information on Detekt, have a look at https://github.com/arturbosch/detekt
  
-
+## Contributors
+ * [andreysaksonov](https://github.com/andreysaksonov)
+ * [josephlbarnett](https://github.com/josephlbarnett)
+ * [reubenfirmin](https://github.com/reubenfirmin)
 
 ## License
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FOzsie%2Fdetekt-maven-plugin.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FOzsie%2Fdetekt-maven-plugin?ref=badge_large)
