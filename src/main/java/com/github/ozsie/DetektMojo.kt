@@ -86,7 +86,7 @@ abstract class DetektMojo : AbstractMojo() {
                 .useIf(disableDefaultRuleSets, DISABLE_DEFAULT_RULE_SET)
                 .useIf(parallel, PARALLEL)
                 .useIf(baseline.isNotEmpty(), BASELINE, baseline)
-                .useIf(config.isNotEmpty(), CONFIG, config)
+                .useIf(config.isNotEmpty(), CONFIG, resolveConfig(mavenProject, config))
                 .useIf(configResource.isNotEmpty(), CONFIG_RESOURCE, configResource)
                 .useIf(filters.isNotEmpty(), FILTERS, filters.joinToString(SEMICOLON))
                 .useIf(input.isNotEmpty(), INPUT, input)
@@ -143,3 +143,28 @@ internal infix fun Dependency.asPath(root: String) =
 internal fun Dependency.getIdentifier() = "$groupId:$artifactId"
 
 internal fun String.asPath() = replace(DOT, SLASH)
+
+internal fun resolveConfig(project: MavenProject?, config: String): String {
+    if (project == null) return config
+    val confLocation: String
+    // look at provided path in case it's absolute
+    val provided = File(config).absoluteFile
+    if (!provided.exists()) {
+        // look for the file relative to the project basedir
+        val projectLocal = File(project.basedir, config)
+        confLocation = if (projectLocal.exists()) {
+            projectLocal.absolutePath
+        } else {
+            // look for the file in the directory above the project (in case of multimodule projects)
+            val parent = File(project.basedir.parentFile, config)
+            if (parent.exists()) {
+                parent.absolutePath
+            } else {
+                throw RuntimeException("Cannot find the config ${provided.absolutePath} or ${parent.absolutePath}")
+            }
+        }
+    } else {
+        confLocation = provided.absolutePath
+    }
+    return confLocation
+}
