@@ -15,7 +15,7 @@ A maven plugin that wraps the Detekt CLI. It supports the same parameters as the
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.0.0-RC14</version>
+            <version>1.0.0-RC14-2</version>
             <executions>
                 <execution>
                     <phase>verify</phase>
@@ -37,7 +37,7 @@ All parameters available to Detekt version _1.0.0-RC14_ can be configured in the
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.0.0-RC14</version>
+            <version>1.0.0-RC14-2</version>
             <executions>
                 <execution>
                     <phase>verify</phase>
