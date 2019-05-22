@@ -9,6 +9,9 @@ import org.apache.maven.plugins.annotations.Mojo
 @Mojo(name = "create-baseline")
 open class CreateBaselineMojo : DetektMojo() {
     override fun execute() {
+        getCliSting().forEach {
+            log.debug("Applying $it")
+        }
         val cliArgs = parseArguments<CliArgs>(cliString).first
         if (!skip) Runner(cliArgs).execute()
     }

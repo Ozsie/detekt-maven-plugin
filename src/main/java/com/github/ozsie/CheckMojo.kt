@@ -16,6 +16,9 @@ import java.nio.file.Paths
         requiresDependencyResolution = ResolutionScope.TEST)
 class CheckMojo : DetektMojo() {
     override fun execute() {
+        getCliSting().forEach {
+            log.debug("Applying $it")
+        }
         val cliArgs = parseArguments<CliArgs>(getCliSting().log().toTypedArray()).first
         if (mavenProject?.basedir != null) {
             skip = !Files.isDirectory(Paths.get("${mavenProject?.basedir}/src"))

@@ -21,6 +21,8 @@ const val PLUGINS = "-p"
 const val PRINT_AST = "--print-ast"
 const val RUN_RULE = "--run-rule"
 const val REPORT = "-r"
+const val BUILD_UPON_DEFAULT_CONFIG = "--build-upon-default-config"
+const val FAIL_FAST = "--fail-fast"
 
 const val MDP_ID = "com.github.ozsie:detekt-maven-plugin"
 
@@ -66,6 +68,12 @@ abstract class DetektMojo : AbstractMojo() {
     @Parameter(property = "detekt.disableDefaultRuleset", defaultValue = "false")
     var disableDefaultRuleset = false
 
+    @Parameter(property = "detekt.buildUponDefaultConfig", defaultValue = "false")
+    var buildUponDefaultConfig = false
+
+    @Parameter(property = "detekt.failFast", defaultValue = "false")
+    var failFast = false
+
     @Parameter(property = "detekt.runRule", defaultValue = "")
     var runRule = ""
 
@@ -93,6 +101,8 @@ abstract class DetektMojo : AbstractMojo() {
                 .useIf(runRule.isNotEmpty(), RUN_RULE, runRule)
                 .useIf(report.isNotEmpty(), toArgList(report))
                 .useIf(printAst, PRINT_AST)
+                .useIf(buildUponDefaultConfig, BUILD_UPON_DEFAULT_CONFIG)
+                .useIf(failFast, FAIL_FAST)
                 .useIf(disableDefaultRuleset, DISABLE_DEFAULT_RULE_SET)
                 .useIf(plugins.isNotEmpty(), PLUGINS, plugins.buildPluginPaths(mavenProject, localRepoLocation))
     }
