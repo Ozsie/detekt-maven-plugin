@@ -15,14 +15,16 @@ const val PARALLEL = "--parallel"
 const val BASELINE = "-b"
 const val CONFIG = "-c"
 const val CONFIG_RESOURCE = "-cr"
-const val FILTERS = "-f"
 const val INPUT = "-i"
 const val PLUGINS = "-p"
-const val PRINT_AST = "--print-ast"
-const val RUN_RULE = "--run-rule"
 const val REPORT = "-r"
 const val BUILD_UPON_DEFAULT_CONFIG = "--build-upon-default-config"
 const val FAIL_FAST = "--fail-fast"
+const val AUTO_CORRECT = "-ac"
+const val CLASS_PATH = "-cp"
+const val EXCLUDES = "-ex"
+const val INCLUDES = "-in"
+const val JVM_TARGET = "--jvm-target"
 
 const val MDP_ID = "com.github.ozsie:detekt-maven-plugin"
 
@@ -50,9 +52,6 @@ abstract class DetektMojo : AbstractMojo() {
     @Parameter(property = "detekt.disable-default-rulesets", defaultValue = "false")
     var disableDefaultRuleSets = false
 
-    @Parameter(property = "detekt.filters")
-    var filters = ArrayList<String>()
-
     @Parameter(property = "detekt.help", defaultValue = "false")
     var help = false
 
@@ -61,9 +60,6 @@ abstract class DetektMojo : AbstractMojo() {
 
     @Parameter(property = "detekt.parallel", defaultValue = "false")
     var parallel = false
-
-    @Parameter(property = "detekt.printAst", defaultValue = "false")
-    var printAst = false
 
     @Parameter(property = "detekt.disableDefaultRuleset", defaultValue = "false")
     var disableDefaultRuleset = false
@@ -74,14 +70,26 @@ abstract class DetektMojo : AbstractMojo() {
     @Parameter(property = "detekt.failFast", defaultValue = "false")
     var failFast = false
 
-    @Parameter(property = "detekt.runRule", defaultValue = "")
-    var runRule = ""
-
     @Parameter(property = "detekt.report")
     var report = ArrayList<String>()
 
     @Parameter(property = "detekt.plugins")
     var plugins = ArrayList<String>()
+
+    @Parameter(property = "detekt.autoCorrect")
+    var autoCorrect = false
+
+    @Parameter(property = "detekt.classPath")
+    var classPath = ""
+
+    @Parameter(property = "detekt.excludes")
+    var excludes = ""
+
+    @Parameter(property = "detekt.includes")
+    var includes = ""
+
+    @Parameter(property = "detekt.jvmTarget")
+    var jvmTarget = ""
 
     @Parameter(defaultValue = "\${project}", readonly = true)
     var mavenProject: MavenProject? = null
@@ -96,15 +104,17 @@ abstract class DetektMojo : AbstractMojo() {
                 .useIf(baseline.isNotEmpty(), BASELINE, baseline)
                 .useIf(config.isNotEmpty(), CONFIG, resolveConfig(mavenProject, config))
                 .useIf(configResource.isNotEmpty(), CONFIG_RESOURCE, configResource)
-                .useIf(filters.isNotEmpty(), FILTERS, filters.joinToString(SEMICOLON))
                 .useIf(input.isNotEmpty(), INPUT, input)
-                .useIf(runRule.isNotEmpty(), RUN_RULE, runRule)
                 .useIf(report.isNotEmpty(), toArgList(report))
-                .useIf(printAst, PRINT_AST)
                 .useIf(buildUponDefaultConfig, BUILD_UPON_DEFAULT_CONFIG)
                 .useIf(failFast, FAIL_FAST)
                 .useIf(disableDefaultRuleset, DISABLE_DEFAULT_RULE_SET)
                 .useIf(plugins.isNotEmpty(), PLUGINS, plugins.buildPluginPaths(mavenProject, localRepoLocation))
+                .useIf(autoCorrect, AUTO_CORRECT)
+                .useIf(classPath.isNotEmpty(), CLASS_PATH)
+                .useIf(excludes.isNotEmpty(), EXCLUDES)
+                .useIf(includes.isNotEmpty(), INCLUDES)
+                .useIf(jvmTarget.isNotEmpty(), JVM_TARGET)
     }
 
     internal fun <T> ArrayList<T>.log(): ArrayList<T> = log(this@DetektMojo.log)
