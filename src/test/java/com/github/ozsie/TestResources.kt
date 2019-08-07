@@ -26,16 +26,16 @@ internal fun resolveTestResourcePath(path: String): File {
  */
 internal fun projectWithBasedirAt(resourcePath: String): MavenProject {
     val resolved = resolveTestResourcePath(resourcePath)
-    val basedir = if (resolved.isFile) {
+    val base = if (resolved.isFile) {
         resolved.parentFile
     } else {
         resolved
     }
-    assertTrue(basedir.exists(), "Expected directory at $basedir to exist")
+    assertTrue(base.exists(), "Expected directory at $base to exist")
 
     return mock {
         on {
             basedir
-        } doReturn basedir
+        } doReturn base
     }
 }
