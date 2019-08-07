@@ -6,6 +6,11 @@ import java.io.FileNotFoundException
 
 internal fun resolveConfig(project: MavenProject?, config: String): String {
     if (project == null) return config
+    return config.split(',', ';')
+        .joinToString(separator = ";") { resolveSingle(project, it) }
+}
+
+private fun resolveSingle(project: MavenProject, config: String): String {
     val confLocation: String
     // look at provided path in case it's absolute
     val provided = File(config).absoluteFile
