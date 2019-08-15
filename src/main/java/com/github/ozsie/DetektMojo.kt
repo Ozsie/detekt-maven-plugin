@@ -107,9 +107,9 @@ abstract class DetektMojo : AbstractMojo() {
                 .useIf(disableDefaultRuleset, DISABLE_DEFAULT_RULE_SET)
                 .useIf(plugins.isNotEmpty(), PLUGINS, plugins.buildPluginPaths(mavenProject, localRepoLocation))
                 .useIf(autoCorrect, AUTO_CORRECT)
-                .useIf(classPath.isNotEmpty(), CLASS_PATH)
-                .useIf(excludes.isNotEmpty(), EXCLUDES)
-                .useIf(includes.isNotEmpty(), INCLUDES)
+                .useIf(classPath.isNotEmpty(), CLASS_PATH, classPath)
+                .useIf(excludes.isNotEmpty(), EXCLUDES, excludes)
+                .useIf(includes.isNotEmpty(), INCLUDES, includes)
                 .jvmTargetIfInitialized()
     }
 
