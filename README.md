@@ -30,7 +30,7 @@ Using the above configuration, Detekt will scan source files in _${basedir}/src_
 
 All parameters available to Detekt version _1.0.0_ can be configured in the plugin.
 
-##Specify report files
+## Specify report files
 ```xml
 <build>
     <plugins>
