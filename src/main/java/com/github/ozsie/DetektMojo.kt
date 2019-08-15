@@ -1,12 +1,8 @@
 package com.github.ozsie
 
-import org.apache.maven.model.Dependency
-import org.apache.maven.model.Plugin
 import org.apache.maven.plugin.AbstractMojo
 import org.apache.maven.plugins.annotations.Parameter
 import org.apache.maven.project.MavenProject
-import java.io.File
-import kotlin.collections.ArrayList
 
 const val AUTO_CORRECT = "-ac"
 const val BASELINE = "-b"
