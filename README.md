@@ -90,8 +90,9 @@ _Example_
  * [andreysaksonov](https://github.com/andreysaksonov)
  * [josephlbarnett](https://github.com/josephlbarnett)
  * [reubenfirmin](https://github.com/reubenfirmin)
- * [ThatJoeMoore](https://github.com/ThatJoeMoore)
  * [schalkms](https://github.com/schalkms)
+ * [ThatJoeMoore](https://github.com/ThatJoeMoore)
+ * [va1m](https://github.com/va1m)
 
 ## License
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FOzsie%2Fdetekt-maven-plugin.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FOzsie%2Fdetekt-maven-plugin?ref=badge_large)
