@@ -25,7 +25,7 @@ A maven plugin that wraps the Detekt CLI. It supports the same parameters as the
         </plugin>
     </plugins>
 </build>
-```ThatJoeMo
+```
 Using the above configuration, Detekt will scan source files in _${basedir}/src_ and output the results in _${basedir}/detekt_.
 
 All parameters available to Detekt version _1.0.0_ can be configured in the plugin.
