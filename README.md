@@ -25,7 +25,7 @@ A maven plugin that wraps the Detekt CLI. It supports the same parameters as the
         </plugin>
     </plugins>
 </build>
-```
+```ThatJoeMo
 Using the above configuration, Detekt will scan source files in _${basedir}/src_ and output the results in _${basedir}/detekt_.
 
 All parameters available to Detekt version _1.0.0_ can be configured in the plugin.
@@ -90,6 +90,8 @@ _Example_
  * [andreysaksonov](https://github.com/andreysaksonov)
  * [josephlbarnett](https://github.com/josephlbarnett)
  * [reubenfirmin](https://github.com/reubenfirmin)
+ * [ThatJoeMoore](https://github.com/ThatJoeMoore)
+ * [schalkms](https://github.com/schalkms)
 
 ## License
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FOzsie%2Fdetekt-maven-plugin.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FOzsie%2Fdetekt-maven-plugin?ref=badge_large)
