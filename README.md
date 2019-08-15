@@ -88,6 +88,7 @@ _Example_
  
 ## Contributors
  * [andreysaksonov](https://github.com/andreysaksonov)
+ * [Geminist](https://github.com/Geminist)
  * [josephlbarnett](https://github.com/josephlbarnett)
  * [reubenfirmin](https://github.com/reubenfirmin)
  * [schalkms](https://github.com/schalkms)
