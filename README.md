@@ -15,7 +15,7 @@ A maven plugin that wraps the Detekt CLI. It supports the same parameters as the
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.0.0-RC16</version>
+            <version>1.0.0</version>
             <executions>
                 <execution>
                     <phase>verify</phase>
@@ -28,7 +28,7 @@ A maven plugin that wraps the Detekt CLI. It supports the same parameters as the
 ```
 Using the above configuration, Detekt will scan source files in _${basedir}/src_ and output the results in _${basedir}/detekt_.
 
-All parameters available to Detekt version _1.0.0-RC16_ can be configured in the plugin.
+All parameters available to Detekt version _1.0.0_ can be configured in the plugin.
 
 ##Specify report files
 ```xml
@@ -37,7 +37,7 @@ All parameters available to Detekt version _1.0.0-RC16_ can be configured in the
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.0.0-RC16</version>
+            <version>1.0.0</version>
             <executions>
                 <execution>
                     <phase>verify</phase>
