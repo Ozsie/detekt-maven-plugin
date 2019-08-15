@@ -61,7 +61,7 @@
         <jacoco-maven-plugin.version>0.8.4</jacoco-maven-plugin.version>
         <nexus-staging-maven-plugin.version>1.6.7</nexus-staging-maven-plugin.version>
         <maven-gpg-plugin.version>1.5</maven-gpg-plugin.version>
-        <detekt-maven-plugin.version>1.0.0-RC16</detekt-maven-plugin.version>
+        <detekt-maven-plugin.version>1.0.0</detekt-maven-plugin.version>
     </properties>
 
     <dependencies>
