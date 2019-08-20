@@ -20,9 +20,7 @@ class CheckMojo : DetektMojo() {
             log.debug("Applying $it")
         }
         val cliArgs = parseArguments<CliArgs>(getCliSting().log().toTypedArray()).first
-        if (mavenProject?.basedir != null) {
-            skip = !Files.isDirectory(Paths.get("${mavenProject?.basedir}/src"))
-        }
-        if (!skip) return Runner(cliArgs).execute()
+        skip = !Files.isDirectory(Paths.get(input))
+        if (!skip) return Runner(cliArgs).execute() else log.info("Input directory '$input' not found, skipping module")
     }
 }
