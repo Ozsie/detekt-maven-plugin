@@ -12,8 +12,7 @@ import java.nio.file.Paths
 @Suppress("unused")
 @Mojo(name = "check",
         defaultPhase = LifecyclePhase.VERIFY,
-        requiresDependencyCollection = ResolutionScope.TEST,
-        requiresDependencyResolution = ResolutionScope.TEST)
+        requiresDependencyCollection = ResolutionScope.TEST)
 class CheckMojo : DetektMojo() {
     override fun execute() {
         getCliSting().forEach {
