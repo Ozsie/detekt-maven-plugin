@@ -18,6 +18,7 @@ const val FAIL_FAST = "--fail-fast"
 const val INCLUDES = "-in"
 const val INPUT = "-i"
 const val JVM_TARGET = "--jvm-target"
+const val LANGUAGE_VERSION = "--language-version"
 const val PARALLEL = "--parallel"
 const val PLUGINS = "-p"
 const val REPORT = "-r"
@@ -85,7 +86,10 @@ abstract class DetektMojo : AbstractMojo() {
     var includes = ""
 
     @Parameter(property = "detekt.jvmTarget")
-    lateinit var jvmTarget: JvmTarget
+    var jvmTarget = ""
+
+    @Parameter(property = "detekt.languageVersion")
+    var languageVersion = ""
 
     @Parameter(defaultValue = "\${project}", readonly = true)
     var mavenProject: MavenProject? = null
@@ -110,14 +114,8 @@ abstract class DetektMojo : AbstractMojo() {
                 .useIf(classPath.isNotEmpty(), CLASS_PATH, classPath)
                 .useIf(excludes.isNotEmpty(), EXCLUDES, excludes)
                 .useIf(includes.isNotEmpty(), INCLUDES, includes)
-                .jvmTargetIfInitialized()
-    }
-
-    private fun ArrayList<String>.jvmTargetIfInitialized() = apply {
-        if (::jvmTarget.isInitialized) {
-            add(JVM_TARGET)
-            add(jvmTarget.name)
-        }
+                .useIf(jvmTarget.isNotEmpty(), JVM_TARGET, jvmTarget)
+                .useIf(languageVersion.isNotEmpty(), LANGUAGE_VERSION, languageVersion)
     }
 
     internal fun <T> ArrayList<T>.log(): ArrayList<T> = log(this@DetektMojo.log)
