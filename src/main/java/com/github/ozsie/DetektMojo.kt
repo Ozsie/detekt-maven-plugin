@@ -4,6 +4,8 @@ import org.apache.maven.plugin.AbstractMojo
 import org.apache.maven.plugins.annotations.Parameter
 import org.apache.maven.project.MavenProject
 
+
+
 const val AUTO_CORRECT = "-ac"
 const val BASELINE = "-b"
 const val BUILD_UPON_DEFAULT_CONFIG = "--build-upon-default-config"
@@ -21,6 +23,7 @@ const val JVM_TARGET = "--jvm-target"
 const val PARALLEL = "--parallel"
 const val PLUGINS = "-p"
 const val REPORT = "-r"
+const val LANGUAGE_VERSION = "--language-version"
 
 const val MDP_ID = "com.github.ozsie:detekt-maven-plugin"
 
@@ -87,6 +90,9 @@ abstract class DetektMojo : AbstractMojo() {
     @Parameter(property = "detekt.jvmTarget")
     lateinit var jvmTarget: JvmTarget
 
+    @Parameter(property = "detekt.languageVersion")
+    lateinit var languageVersion: JvmTarget
+
     @Parameter(defaultValue = "\${project}", readonly = true)
     var mavenProject: MavenProject? = null
 
@@ -111,12 +117,20 @@ abstract class DetektMojo : AbstractMojo() {
                 .useIf(excludes.isNotEmpty(), EXCLUDES, excludes)
                 .useIf(includes.isNotEmpty(), INCLUDES, includes)
                 .jvmTargetIfInitialized()
+                .languageVersionIfInitialized()
     }
 
     private fun ArrayList<String>.jvmTargetIfInitialized() = apply {
         if (::jvmTarget.isInitialized) {
             add(JVM_TARGET)
-            add(jvmTarget.name)
+            add(jvmTarget.value)
+        }
+    }
+
+    private fun ArrayList<String>.languageVersionIfInitialized() = apply {
+        if (::languageVersion.isInitialized) {
+            add(LANGUAGE_VERSION)
+            add(languageVersion.value)
         }
     }
 
