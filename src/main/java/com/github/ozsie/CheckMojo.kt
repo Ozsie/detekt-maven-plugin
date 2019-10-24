@@ -12,17 +12,14 @@ import java.nio.file.Paths
 @Suppress("unused")
 @Mojo(name = "check",
         defaultPhase = LifecyclePhase.VERIFY,
-        requiresDependencyCollection = ResolutionScope.TEST,
-        requiresDependencyResolution = ResolutionScope.TEST)
+        requiresDependencyCollection = ResolutionScope.TEST)
 class CheckMojo : DetektMojo() {
     override fun execute() {
         getCliSting().forEach {
             log.debug("Applying $it")
         }
         val cliArgs = parseArguments<CliArgs>(getCliSting().log().toTypedArray()).first
-        if (mavenProject?.basedir != null) {
-            skip = !Files.isDirectory(Paths.get("${mavenProject?.basedir}/src"))
-        }
-        if (!skip) return Runner(cliArgs).execute()
+        skip = !Files.isDirectory(Paths.get(input))
+        if (!skip) return Runner(cliArgs).execute() else log.info("Input directory '$input' not found, skipping module")
     }
 }

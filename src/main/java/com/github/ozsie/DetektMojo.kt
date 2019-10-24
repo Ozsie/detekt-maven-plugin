@@ -4,8 +4,6 @@ import org.apache.maven.plugin.AbstractMojo
 import org.apache.maven.plugins.annotations.Parameter
 import org.apache.maven.project.MavenProject
 
-
-
 const val AUTO_CORRECT = "-ac"
 const val BASELINE = "-b"
 const val BUILD_UPON_DEFAULT_CONFIG = "--build-upon-default-config"
@@ -20,10 +18,10 @@ const val FAIL_FAST = "--fail-fast"
 const val INCLUDES = "-in"
 const val INPUT = "-i"
 const val JVM_TARGET = "--jvm-target"
+const val LANGUAGE_VERSION = "--language-version"
 const val PARALLEL = "--parallel"
 const val PLUGINS = "-p"
 const val REPORT = "-r"
-const val LANGUAGE_VERSION = "--language-version"
 
 const val MDP_ID = "com.github.ozsie:detekt-maven-plugin"
 
@@ -88,10 +86,10 @@ abstract class DetektMojo : AbstractMojo() {
     var includes = ""
 
     @Parameter(property = "detekt.jvmTarget")
-    lateinit var jvmTarget: JvmTarget
+    var jvmTarget = ""
 
     @Parameter(property = "detekt.languageVersion")
-    lateinit var languageVersion: JvmTarget
+    var languageVersion = ""
 
     @Parameter(defaultValue = "\${project}", readonly = true)
     var mavenProject: MavenProject? = null
@@ -116,22 +114,8 @@ abstract class DetektMojo : AbstractMojo() {
                 .useIf(classPath.isNotEmpty(), CLASS_PATH, classPath)
                 .useIf(excludes.isNotEmpty(), EXCLUDES, excludes)
                 .useIf(includes.isNotEmpty(), INCLUDES, includes)
-                .jvmTargetIfInitialized()
-                .languageVersionIfInitialized()
-    }
-
-    private fun ArrayList<String>.jvmTargetIfInitialized() = apply {
-        if (::jvmTarget.isInitialized) {
-            add(JVM_TARGET)
-            add(jvmTarget.value)
-        }
-    }
-
-    private fun ArrayList<String>.languageVersionIfInitialized() = apply {
-        if (::languageVersion.isInitialized) {
-            add(LANGUAGE_VERSION)
-            add(languageVersion.value)
-        }
+                .useIf(jvmTarget.isNotEmpty(), JVM_TARGET, jvmTarget)
+                .useIf(languageVersion.isNotEmpty(), LANGUAGE_VERSION, languageVersion)
     }
 
     internal fun <T> ArrayList<T>.log(): ArrayList<T> = log(this@DetektMojo.log)

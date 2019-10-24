@@ -23,9 +23,10 @@ class CheckMojoSpec : Spek({
     given("a CheckMojo and 'skip' is false") {
         val checkMojo = CheckMojo()
         checkMojo.skip = false
+        checkMojo.input = "."
         on("checkMojo.execute()") {
-            test("ParameterException is thrown") {
-                assertFailsWith(ParameterException::class) {
+            test("Unit is expected") {
+                expect(Unit) {
                     checkMojo.execute()
                 }
             }
