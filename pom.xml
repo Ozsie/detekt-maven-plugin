@@ -43,12 +43,12 @@
         <detekt.version>1.1.1</detekt.version>
         <jcommander.version>1.72</jcommander.version>
         <snakeyaml.version>1.21</snakeyaml.version>
-        <maven.api.version>3.0.5</maven.api.version>
+        <maven.api.version>3.6.2</maven.api.version>
         <maven-plugin-annotations.version>3.2</maven-plugin-annotations.version>
-        <plexus-utils.version>3.0.8</plexus-utils.version>
+        <plexus-utils.version>3.3.0</plexus-utils.version>
 
         <!-- Test -->
-        <spek-api.version>1.1.5</spek-api.version>
+        <spek-api.version>1.2.1</spek-api.version>
         <mockito-kotlin.version>1.6.0</mockito-kotlin.version>
         <junit-platform-surefire-provider.version>1.1.0</junit-platform-surefire-provider.version>
 
