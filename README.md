@@ -30,6 +30,31 @@ Using the above configuration, Detekt will scan source files in _${basedir}/src_
 
 All parameters available to Detekt version _1.0.0_ can be configured in the plugin.
 
+
+### Using plugin
+```xml
+<build>
+    <plugins>
+        <plugin>
+            <groupId>com.github.ozsie</groupId>
+            <artifactId>detekt-maven-plugin</artifactId>
+            <version>1.6.0</version>
+            <executions>
+                <execution>
+                    <phase>verify</phase>
+                    <goals><goal>check</goal></goals>
+                    <configuration>
+                        <plugins>
+                            <plugin>path/to/plugin.jar</plugin>
+                        </plugins>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
+```
+
 ## Specify report files
 ```xml
 <build>
