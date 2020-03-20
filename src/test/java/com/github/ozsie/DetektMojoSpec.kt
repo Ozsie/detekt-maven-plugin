@@ -90,7 +90,6 @@ object DetektMojoSpec : Spek({
             )
         }
 
-
         val stringList = arrayListOf("x.y:y", "a.b:b", "c.d:d")
         on("buildPluginPaths") {
             val pluginPath = stringList.buildPluginPaths(mavenProject, "~/.m2")

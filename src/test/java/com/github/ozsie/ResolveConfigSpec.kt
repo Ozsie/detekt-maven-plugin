@@ -8,7 +8,7 @@ import java.io.FileNotFoundException
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
-//Note: while annoying, the use of File() in the asserts should maximize cross-platform compatibility
+// Note: while annoying, the use of File() in the asserts should maximize cross-platform compatibility
 object ResolveConfigSpec : Spek({
 
     given("a test project") {
@@ -99,5 +99,4 @@ object ResolveConfigSpec : Spek({
             }
         }
     }
-
 })

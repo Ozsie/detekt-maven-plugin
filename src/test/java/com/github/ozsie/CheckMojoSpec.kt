@@ -1,10 +1,8 @@
 package com.github.ozsie
 
-import com.beust.jcommander.ParameterException
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.given
 import org.jetbrains.spek.api.dsl.on
-import kotlin.test.assertFailsWith
 import kotlin.test.expect
 
 class CheckMojoSpec : Spek({
