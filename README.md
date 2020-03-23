@@ -15,7 +15,7 @@ A maven plugin that wraps the Detekt CLI. It supports the same parameters as the
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.6.0</version>
+            <version>1.7.0</version>
             <executions>
                 <execution>
                     <phase>verify</phase>
@@ -91,13 +91,17 @@ _Examples_
 
 ***create-baseline***
 
-Used to create a baseline. All cli parameters, excluding -gc and -cb, are available using -Ddetekt.{parameter}
+Used to create a baseline. All cli parameters, excluding -gc and -cb,
+are available using -Ddetekt.{parameter}. By default, a file called
+baseline.xml will be generated. If you include -Ddetekt.baseline in the
+call you can specify some other name for the baseline file.
 
 _Examples_
 
- * `mvn detekt:cb -Ddetekt.config=detekt.yml`
+*  `mvn detekt:cb -Ddetekt.config=detekt.yml`
  * `mvn detekt:cb -Ddetekt.debug=true`
- * `mvn detekt:create-baseline -Ddetekt.config=detekt.yml`
+*  `mvn detekt:cb -Ddetekt.baseline=some-other-baseline.xml`
+*  `mvn detekt:create-baseline -Ddetekt.config=detekt.yml`
  * `mvn detekt:create-baseline -Ddetekt.debug=true`
 
 ***generate-config***
@@ -119,6 +123,7 @@ _Example_
  * [schalkms](https://github.com/schalkms)
  * [ThatJoeMoore](https://github.com/ThatJoeMoore)
  * [va1m](https://github.com/va1m)
+ * [vladimirfx](https://github.com/vladimirfx)
 
 ## License
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FOzsie%2Fdetekt-maven-plugin.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FOzsie%2Fdetekt-maven-plugin?ref=badge_large)

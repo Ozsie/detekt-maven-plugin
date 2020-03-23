@@ -9,13 +9,21 @@ import org.apache.maven.plugins.annotations.Mojo
 @Mojo(name = "create-baseline")
 open class CreateBaselineMojo : DetektMojo() {
     override fun execute() {
-        getCliSting().forEach {
+        val cliStr = cliString
+        cliStr.forEach {
             log.debug("Applying $it")
         }
-        val cliArgs = parseArguments<CliArgs>(cliString)
+        val cliArgs = parseArguments<CliArgs>(cliStr)
         if (!skip) Runner(cliArgs).execute()
     }
-    private val cliString get() = getCliSting().apply { add(CREATE_BASELINE) }.log().toTypedArray()
+    private val cliString get() = getCliSting().apply {
+        add(CREATE_BASELINE)
+        if (!contains(BASELINE)) {
+            log.debug("Baseline flag not present")
+            add(BASELINE)
+            add("baseline.xml")
+        }
+    }.log().toTypedArray()
 }
 
 @Suppress("unused") @Mojo(name = "cb") class CBMojo : CreateBaselineMojo()
