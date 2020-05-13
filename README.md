@@ -124,6 +124,9 @@ _Example_
  * [ThatJoeMoore](https://github.com/ThatJoeMoore)
  * [va1m](https://github.com/va1m)
  * [vladimirfx](https://github.com/vladimirfx)
+ * [pinkasey](https://github.com/pinkasey)
+ * [krichter722](https://github.com/krichter722)
+
 
 ## License
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FOzsie%2Fdetekt-maven-plugin.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FOzsie%2Fdetekt-maven-plugin?ref=badge_large)
