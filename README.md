@@ -15,7 +15,7 @@ A maven plugin that wraps the Detekt CLI. It supports the same parameters as the
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.7.0</version>
+            <version>1.8.0</version>
             <executions>
                 <execution>
                     <phase>verify</phase>
