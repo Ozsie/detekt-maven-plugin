@@ -13,8 +13,8 @@ open class CreateBaselineMojo : DetektMojo() {
         cliStr.forEach {
             log.debug("Applying $it")
         }
-        val cliArgs = parseArguments<CliArgs>(cliStr)
-        if (!skip) Runner(cliArgs).execute()
+        val cliArgs = parseArguments<CliArgs>(cliStr, System.out, System.err)
+        if (!skip) Runner(cliArgs, System.out, System.err).execute()
     }
     private val cliString get() = getCliSting().apply {
         add(CREATE_BASELINE)

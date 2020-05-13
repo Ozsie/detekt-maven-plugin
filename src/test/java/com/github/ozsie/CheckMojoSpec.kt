@@ -21,7 +21,6 @@ class CheckMojoSpec : Spek({
     given("a CheckMojo and 'skip' is false") {
         val checkMojo = CheckMojo()
         checkMojo.skip = false
-        checkMojo.input = "."
         on("checkMojo.execute()") {
             test("Unit is expected") {
                 expect(Unit) {
