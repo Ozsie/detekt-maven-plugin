@@ -50,7 +50,7 @@
         <!-- Test -->
         <spek-api.version>1.2.1</spek-api.version>
         <mockito-kotlin.version>1.6.0</mockito-kotlin.version>
-        <junit-platform-surefire-provider.version>1.1.0</junit-platform-surefire-provider.version>
+        <junit-platform-surefire-provider.version>1.3.2</junit-platform-surefire-provider.version>
 
         <!-- Plugins -->
         <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
