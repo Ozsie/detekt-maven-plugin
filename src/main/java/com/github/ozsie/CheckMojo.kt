@@ -1,6 +1,5 @@
 package com.github.ozsie
 
-import io.gitlab.arturbosch.detekt.cli.CliArgs
 import io.gitlab.arturbosch.detekt.cli.parseArguments
 import io.gitlab.arturbosch.detekt.cli.runners.Runner
 import org.apache.maven.plugins.annotations.LifecyclePhase
@@ -19,7 +18,7 @@ class CheckMojo : DetektMojo() {
         getCliSting().forEach {
             log.debug("Applying $it")
         }
-        val cliArgs = parseArguments<CliArgs>(getCliSting().log().toTypedArray(), System.out, System.err)
+        val cliArgs = parseArguments(getCliSting().log().toTypedArray(), System.out, System.err)
         skip = !Files.isDirectory(Paths.get(input))
         if (!skip)
             return Runner(cliArgs, System.out, System.err).execute()

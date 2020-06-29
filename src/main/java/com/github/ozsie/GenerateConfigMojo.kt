@@ -9,7 +9,7 @@ import org.apache.maven.plugins.annotations.Mojo
 @Mojo(name = "generate-config")
 open class GenerateConfigMojo : DetektMojo() {
     override fun execute() {
-        val cliArgs = parseArguments<CliArgs>(getCliSting().log().toTypedArray(), System.out, System.err)
+        val cliArgs = parseArguments(getCliSting().log().toTypedArray(), System.out, System.err)
         ConfigExporter(cliArgs).run {
             if (!skip) return execute()
         }
