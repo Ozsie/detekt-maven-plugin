@@ -2,6 +2,7 @@
 [![codecov](https://codecov.io/gh/Ozsie/detekt-maven-plugin/branch/master/graph/badge.svg)](https://codecov.io/gh/Ozsie/detekt-maven-plugin)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FOzsie%2Fdetekt-maven-plugin.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FOzsie%2Fdetekt-maven-plugin?ref=badge_shield)
 [![Maven Central](https://img.shields.io/maven-central/v/com.github.ozsie/detekt-maven-plugin.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.github.ozsie%22%20AND%20a:%22detekt-maven-plugin%22)
+[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=Ozsie/detekt-maven-plugin)](https://dependabot.com)
 
 # Detekt Maven Plugin
 
@@ -15,7 +16,7 @@ A maven plugin that wraps the Detekt CLI. It supports the same parameters as the
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.9.1</version>
+            <version>1.10.0</version>
             <executions>
                 <execution>
                     <phase>verify</phase>
@@ -28,7 +29,7 @@ A maven plugin that wraps the Detekt CLI. It supports the same parameters as the
 ```
 Using the above configuration, Detekt will scan source files in _${basedir}/src_ and output the results in _${basedir}/detekt_.
 
-All parameters available to Detekt version _1.9.1_ can be configured in
+All parameters available to Detekt version _1.10.0_ can be configured in
 the plugin.
 
 
@@ -39,7 +40,7 @@ the plugin.
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.9.1</version>
+            <version>1.10.0</version>
             <executions>
                 <execution>
                     <phase>verify</phase>
@@ -63,7 +64,7 @@ the plugin.
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.9.1</version>
+            <version>1.10.0</version>
             <executions>
                 <execution>
                     <phase>verify</phase>
@@ -114,7 +115,7 @@ _Example_
  * `mvn detekt:gc`
  * `mvn detekt:generate-config`
  
- For more information on Detekt, have a look at https://github.com/arturbosch/detekt
+ For more information on Detekt, have a look at https://github.com/detekt/detekt
  
 ## Contributors
  * [andreysaksonov](https://github.com/andreysaksonov)
