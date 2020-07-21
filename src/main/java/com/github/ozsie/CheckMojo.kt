@@ -20,9 +20,8 @@ class CheckMojo : DetektMojo() {
         }
         val cliArgs = parseArguments(getCliSting().log().toTypedArray(), System.out, System.err)
         skip = !Files.isDirectory(Paths.get(input))
-        if (!skip)
-            return Runner(cliArgs, System.out, System.err).execute()
-        else
-            log.info("Input directory '$input' not found, skipping module")
+        if (!skip) return Runner(cliArgs, System.out, System.err).execute() else inputSkipLog()
     }
+
+    private fun inputSkipLog() = log.info("Input directory '$input' not found, skipping module")
 }

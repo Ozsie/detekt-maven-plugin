@@ -57,6 +57,33 @@ the plugin.
 </build>
 ```
 
+Or
+
+```xml
+<build>
+    <plugins>
+        <plugin>
+            <groupId>com.github.ozsie</groupId>
+            <artifactId>detekt-maven-plugin</artifactId>
+            <version>1.10.0</version>
+            <executions>
+                <execution>
+                    <phase>verify</phase>
+                    <goals><goal>check</goal></goals>
+                </execution>
+            </executions>
+            <dependencies>
+                <dependency>
+                    <groupId>group</groupId>
+                    <artifactId>artifact</artifactId>
+                    <version>version</version>
+                </dependency>
+            </dependencies>
+        </plugin>
+    </plugins>
+</build>
+```
+
 ## Specify report files
 ```xml
 <build>

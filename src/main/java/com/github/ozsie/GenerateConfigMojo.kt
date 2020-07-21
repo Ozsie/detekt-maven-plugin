@@ -1,6 +1,5 @@
 package com.github.ozsie
 
-import io.gitlab.arturbosch.detekt.cli.CliArgs
 import io.gitlab.arturbosch.detekt.cli.parseArguments
 import io.gitlab.arturbosch.detekt.cli.runners.ConfigExporter
 import org.apache.maven.plugins.annotations.Mojo
