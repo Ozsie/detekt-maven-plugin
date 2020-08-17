@@ -4,7 +4,7 @@
 
     <groupId>com.github.ozsie</groupId>
     <artifactId>detekt-maven-plugin</artifactId>
-    <version>1.10.1-SNAPSHOT</version>
+    <version>1.11.0-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
 
     <name>detekt-maven-plugin Maven Plugin</name>
@@ -263,13 +263,6 @@
                         </configuration>
                     </execution>
                 </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>io.gitlab.arturbosch.detekt</groupId>
-                        <artifactId>detekt-formatting</artifactId>
-                        <version>${detekt.version}</version>
-                    </dependency>
-                </dependencies>
             </plugin>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>

@@ -26,7 +26,7 @@ class GenerateConfigMojoSpec : Spek({
         on("generateConfigMojo.execute()") {
             test("Config file is generated") {
                 generateConfigMojo.execute()
-                val file = File("default-detekt-config.yml")
+                val file = File("detekt.yml")
                 assertTrue(file.exists())
                 file.deleteOnExit()
             }
@@ -51,7 +51,7 @@ class GenerateConfigMojoSpec : Spek({
         on("generateConfigMojo.execute()") {
             test("Config file is generated") {
                 generateConfigMojo.execute()
-                val file = File("default-detekt-config.yml")
+                val file = File("detekt.yml")
                 assertTrue(file.exists())
                 file.deleteOnExit()
             }
