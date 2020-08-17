@@ -18,7 +18,7 @@ class CheckMojo : DetektMojo() {
         getCliSting().forEach {
             log.debug("Applying $it")
         }
-        val cliArgs = parseArguments(getCliSting().log().toTypedArray(), System.out, System.err)
+        val cliArgs = parseArguments(getCliSting().log().toTypedArray())
         skip = !Files.isDirectory(Paths.get(input))
         if (!skip) return Runner(cliArgs, System.out, System.err).execute() else inputSkipLog()
     }
