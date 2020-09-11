@@ -16,7 +16,7 @@ A maven plugin that wraps the Detekt CLI. It supports the same parameters as the
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.12.0</version>
+            <version>1.13.0</version>
             <executions>
                 <execution>
                     <phase>verify</phase>
@@ -29,7 +29,7 @@ A maven plugin that wraps the Detekt CLI. It supports the same parameters as the
 ```
 Using the above configuration, Detekt will scan source files in _${basedir}/src_ and output the results in _${basedir}/detekt_.
 
-All parameters available to Detekt version _1.12.0_ can be configured in
+All parameters available to Detekt version _1.13.0_ can be configured in
 the plugin.
 
 
@@ -40,7 +40,7 @@ the plugin.
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.12.0</version>
+            <version>1.13.0</version>
             <executions>
                 <execution>
                     <phase>verify</phase>
@@ -65,7 +65,7 @@ Or
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.12.0</version>
+            <version>1.13.0</version>
             <executions>
                 <execution>
                     <phase>verify</phase>
@@ -91,7 +91,7 @@ Or
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.12.0</version>
+            <version>1.13.0</version>
             <executions>
                 <execution>
                     <phase>verify</phase>
@@ -108,6 +108,34 @@ Or
     </plugins>
 </build>
 ```
+Alternatively, the configuration can be placed outside of the
+`<executions>`. This allows the configuration be used when running goals
+standalone
+
+```xml
+<build>
+    <plugins>
+        <plugin>
+            <groupId>com.github.ozsie</groupId>
+            <artifactId>detekt-maven-plugin</artifactId>
+            <version>1.13.0</version>
+            <configuration>
+                <report>
+                    <report>txt:reports/detekt.txt</report>
+                    <report>xml:reports/detekt.xml</report>
+                </report>
+            </configuration>
+            <executions>
+                <execution>
+                    <phase>verify</phase>
+                    <goals><goal>check</goal></goals>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
+```
+
 ### Goals
 ***check***
 
