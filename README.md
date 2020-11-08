@@ -16,7 +16,7 @@ A maven plugin that wraps the Detekt CLI. It supports the same parameters as the
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.14.2</version>
+            <version>1.14.2.1</version>
             <executions>
                 <execution>
                     <phase>verify</phase>
@@ -40,7 +40,7 @@ the plugin.
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.14.2</version>
+            <version>1.14.2.1</version>
             <executions>
                 <execution>
                     <phase>verify</phase>
@@ -65,7 +65,7 @@ Or
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.14.2</version>
+            <version>1.14.2.1</version>
             <executions>
                 <execution>
                     <phase>verify</phase>
@@ -91,7 +91,7 @@ Or
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.14.2</version>
+            <version>1.14.2.1</version>
             <executions>
                 <execution>
                     <phase>verify</phase>
@@ -118,7 +118,7 @@ standalone
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.14.2</version>
+            <version>1.14.2.1</version>
             <configuration>
                 <report>
                     <report>txt:reports/detekt.txt</report>
@@ -183,6 +183,7 @@ _Example_
  * [vladimirfx](https://github.com/vladimirfx)
  * [pinkasey](https://github.com/pinkasey)
  * [krichter722](https://github.com/krichter722)
+ * [currensy](https://github.com/currensy)
 
 
 ## License
