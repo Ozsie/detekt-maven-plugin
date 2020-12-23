@@ -58,6 +58,9 @@ abstract class DetektMojo : AbstractMojo() {
     @Parameter(property = "detekt.parallel", defaultValue = "false")
     var parallel = false
 
+    @Parameter(property = "detekt.failBuildOnMaxIssuesReached", defaultValue = "true")
+    var failBuildOnMaxIssuesReached = true
+
     @Parameter(property = "detekt.disableDefaultRuleset", defaultValue = "false")
     var disableDefaultRuleset = false
 
@@ -105,7 +108,7 @@ abstract class DetektMojo : AbstractMojo() {
                 .useIf(config.isNotEmpty(), CONFIG, resolveConfig(mavenProject, config))
                 .useIf(configResource.isNotEmpty(), CONFIG_RESOURCE, configResource)
                 .useIf(input.isNotEmpty(), INPUT, input)
-                .useIf(report.isNotEmpty(), toArgList(report))
+                .useIf(report.isNotEmpty(), reportsToArgList(report))
                 .useIf(buildUponDefaultConfig, BUILD_UPON_DEFAULT_CONFIG)
                 .useIf(failFast, FAIL_FAST)
                 .useIf(disableDefaultRuleset, DISABLE_DEFAULT_RULE_SET)
@@ -121,7 +124,7 @@ abstract class DetektMojo : AbstractMojo() {
     internal fun <T> ArrayList<T>.log(): ArrayList<T> = log(this@DetektMojo.log)
 }
 
-private fun toArgList(list: List<String>) = ArrayList<String>().apply {
+private fun reportsToArgList(list: List<String>) = ArrayList<String>().apply {
     list.forEach {
         add(REPORT)
         add(it)

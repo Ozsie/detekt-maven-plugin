@@ -20,7 +20,22 @@ class CheckMojo : DetektMojo() {
         }
         val cliArgs = parseArguments(getCliSting().log().toTypedArray())
         val foundInputDir = Files.isDirectory(Paths.get(input))
-        if (!skip && foundInputDir) return Runner(cliArgs, System.out, System.err).execute() else inputSkipLog(skip)
+        if (!skip && foundInputDir)
+            failBuildIfNeeded { Runner(cliArgs, System.out, System.err).execute() }
+        else
+            inputSkipLog(skip)
+    }
+
+    @Suppress("TooGenericExceptionCaught")
+    private fun failBuildIfNeeded(block: () -> Unit) {
+        try {
+            block()
+        } catch (e: Exception){
+            if(failBuildOnMaxIssuesReached)
+                throw e
+            else
+                log.warn("Detekt check found issues. Ignoring because 'failBuildOnMaxIssuesReached' is set to false")
+        }
     }
 
     private fun inputSkipLog(skip: Boolean) {
