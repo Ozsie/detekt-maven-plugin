@@ -1,5 +1,6 @@
 package com.github.ozsie
 
+import io.github.detekt.tooling.api.MaxIssuesReached
 import io.gitlab.arturbosch.detekt.cli.parseArguments
 import io.gitlab.arturbosch.detekt.cli.runners.Runner
 import org.apache.maven.plugins.annotations.LifecyclePhase
@@ -26,12 +27,11 @@ class CheckMojo : DetektMojo() {
             inputSkipLog(skip)
     }
 
-    @Suppress("TooGenericExceptionCaught")
     private fun failBuildIfNeeded(block: () -> Unit) {
         try {
             block()
-        } catch (e: Exception){
-            if(failBuildOnMaxIssuesReached)
+        } catch (e: MaxIssuesReached) {
+            if (failBuildOnMaxIssuesReached)
                 throw e
             else
                 log.warn("Detekt check found issues. Ignoring because 'failBuildOnMaxIssuesReached' is set to false")

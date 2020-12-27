@@ -91,6 +91,12 @@
             <artifactId>kotlin-stdlib-jdk8</artifactId>
             <version>${kotlin.version}</version>
         </dependency>
+        <dependency>
+            <groupId>io.gitlab.arturbosch.detekt</groupId>
+            <artifactId>detekt-tooling</artifactId>
+            <version>${detekt.version}</version>
+            <scope>provided</scope>
+        </dependency>
 
         <dependency>
             <groupId>io.gitlab.arturbosch.detekt</groupId>
