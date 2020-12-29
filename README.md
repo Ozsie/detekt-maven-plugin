@@ -16,7 +16,7 @@ A maven plugin that wraps the Detekt CLI. It supports the same parameters as the
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.15.0</version>
+            <version>1.15.0.1</version>
             <executions>
                 <execution>
                     <phase>verify</phase>
@@ -40,7 +40,7 @@ the plugin.
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.15.0</version>
+            <version>1.15.0.1</version>
             <executions>
                 <execution>
                     <phase>verify</phase>
@@ -65,7 +65,7 @@ Or
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.15.0</version>
+            <version>1.15.0.1</version>
             <executions>
                 <execution>
                     <phase>verify</phase>
@@ -91,7 +91,7 @@ Or
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.15.0</version>
+            <version>1.15.0.1</version>
             <executions>
                 <execution>
                     <phase>verify</phase>
@@ -118,7 +118,7 @@ standalone
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.15.0</version>
+            <version>1.15.0.1</version>
             <configuration>
                 <report>
                     <report>txt:reports/detekt.txt</report>
@@ -184,7 +184,7 @@ _Example_
  * [pinkasey](https://github.com/pinkasey)
  * [krichter722](https://github.com/krichter722)
  * [currensy](https://github.com/currensy)
-
+ * [rgrebski](https://github.com/rgrebski)
 
 ## License
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FOzsie%2Fdetekt-maven-plugin.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FOzsie%2Fdetekt-maven-plugin?ref=badge_large)
