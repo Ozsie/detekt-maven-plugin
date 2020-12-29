@@ -4,7 +4,7 @@
 
     <groupId>com.github.ozsie</groupId>
     <artifactId>detekt-maven-plugin</artifactId>
-    <version>1.15.0</version>
+    <version>1.15.1-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
 
     <name>detekt-maven-plugin Maven Plugin</name>
@@ -90,6 +90,12 @@
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib-jdk8</artifactId>
             <version>${kotlin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.gitlab.arturbosch.detekt</groupId>
+            <artifactId>detekt-tooling</artifactId>
+            <version>${detekt.version}</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>

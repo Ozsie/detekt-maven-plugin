@@ -1,5 +1,6 @@
 package com.github.ozsie
 
+import io.github.detekt.tooling.api.MaxIssuesReached
 import io.gitlab.arturbosch.detekt.cli.parseArguments
 import io.gitlab.arturbosch.detekt.cli.runners.Runner
 import org.apache.maven.plugins.annotations.LifecyclePhase
@@ -20,7 +21,21 @@ class CheckMojo : DetektMojo() {
         }
         val cliArgs = parseArguments(getCliSting().log().toTypedArray())
         val foundInputDir = Files.isDirectory(Paths.get(input))
-        if (!skip && foundInputDir) return Runner(cliArgs, System.out, System.err).execute() else inputSkipLog(skip)
+        if (!skip && foundInputDir)
+            failBuildIfNeeded { Runner(cliArgs, System.out, System.err).execute() }
+        else
+            inputSkipLog(skip)
+    }
+
+    private fun failBuildIfNeeded(block: () -> Unit) {
+        try {
+            block()
+        } catch (e: MaxIssuesReached) {
+            if (failBuildOnMaxIssuesReached)
+                throw e
+            else
+                log.warn("Detekt check found issues. Ignoring because 'failBuildOnMaxIssuesReached' is set to false")
+        }
     }
 
     private fun inputSkipLog(skip: Boolean) {
