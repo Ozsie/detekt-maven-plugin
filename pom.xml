@@ -41,7 +41,7 @@
         <!-- Compile -->
         <kotlin.version>1.4.31</kotlin.version>
         <detekt.version>1.15.0</detekt.version>
-        <jcommander.version>1.80</jcommander.version>
+        <jcommander.version>1.81</jcommander.version>
         <snakeyaml.version>1.21</snakeyaml.version>
         <maven.api.version>3.6.3</maven.api.version>
         <maven-plugin-annotations.version>3.6.0</maven-plugin-annotations.version>
