@@ -4,7 +4,9 @@ import org.apache.maven.plugin.AbstractMojo
 import org.apache.maven.plugins.annotations.Parameter
 import org.apache.maven.project.MavenProject
 
+const val ALL_RULES = "--all-rules"
 const val AUTO_CORRECT = "-ac"
+const val BASE_PATH = "-bp"
 const val BASELINE = "-b"
 const val BUILD_UPON_DEFAULT_CONFIG = "--build-upon-default-config"
 const val CREATE_BASELINE = "-cb"
@@ -19,6 +21,7 @@ const val INCLUDES = "-in"
 const val INPUT = "-i"
 const val JVM_TARGET = "--jvm-target"
 const val LANGUAGE_VERSION = "--language-version"
+const val MAX_ISSUES = "--max-issues"
 const val PARALLEL = "--parallel"
 const val PLUGINS = "-p"
 const val REPORT = "-r"
@@ -94,6 +97,15 @@ abstract class DetektMojo : AbstractMojo() {
     @Parameter(property = "detekt.languageVersion")
     var languageVersion = ""
 
+    @Parameter(property = "detekt.allRules")
+    var allRules = false
+
+    @Parameter(property = "detekt.basePath")
+    var basePath = ""
+
+    @Parameter(property = "detekt.maxIssues")
+    var maxIssues = ""
+
     @Parameter(defaultValue = "\${project}", readonly = true)
     var mavenProject: MavenProject? = null
 
@@ -111,7 +123,6 @@ abstract class DetektMojo : AbstractMojo() {
                 .useIf(report.isNotEmpty(), reportsToArgList(report))
                 .useIf(buildUponDefaultConfig, BUILD_UPON_DEFAULT_CONFIG)
                 .useIf(failFast, FAIL_FAST)
-                .useIf(disableDefaultRuleset, DISABLE_DEFAULT_RULE_SET)
                 .useIf(plugins.isNotEmpty(), PLUGINS, plugins.buildPluginPaths(mavenProject, localRepoLocation))
                 .useIf(autoCorrect, AUTO_CORRECT)
                 .useIf(classPath.isNotEmpty(), CLASS_PATH, classPath)
@@ -119,6 +130,9 @@ abstract class DetektMojo : AbstractMojo() {
                 .useIf(includes.isNotEmpty(), INCLUDES, includes)
                 .useIf(jvmTarget.isNotEmpty(), JVM_TARGET, jvmTarget)
                 .useIf(languageVersion.isNotEmpty(), LANGUAGE_VERSION, languageVersion)
+                .useIf(allRules, ALL_RULES)
+                .useIf(basePath.isNotEmpty(), BASE_PATH, basePath)
+                .useIf(maxIssues.isNotEmpty(), MAX_ISSUES, maxIssues)
     }
 
     internal fun <T> ArrayList<T>.log(): ArrayList<T> = log(this@DetektMojo.log)
