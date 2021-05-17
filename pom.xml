@@ -40,7 +40,7 @@
 
         <!-- Compile -->
         <kotlin.version>1.4.32</kotlin.version>
-        <detekt.version>1.16.0</detekt.version>
+        <detekt.version>1.17.0</detekt.version>
         <jcommander.version>1.81</jcommander.version>
         <snakeyaml.version>1.21</snakeyaml.version>
         <maven.api.version>3.8.1</maven.api.version>
