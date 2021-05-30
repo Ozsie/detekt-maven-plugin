@@ -4,7 +4,7 @@
 
     <groupId>com.github.ozsie</groupId>
     <artifactId>detekt-maven-plugin</artifactId>
-    <version>1.16.0</version>
+    <version>1.17.1</version>
     <packaging>maven-plugin</packaging>
 
     <name>detekt-maven-plugin Maven Plugin</name>
@@ -39,12 +39,12 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- Compile -->
-        <kotlin.version>1.5.0</kotlin.version>
-        <detekt.version>1.16.0</detekt.version>
+        <kotlin.version>1.5.10</kotlin.version>
+        <detekt.version>1.17.1</detekt.version>
         <jcommander.version>1.81</jcommander.version>
         <snakeyaml.version>1.21</snakeyaml.version>
         <maven.api.version>3.8.1</maven.api.version>
-        <maven-plugin-annotations.version>3.6.0</maven-plugin-annotations.version>
+        <maven-plugin-annotations.version>3.6.1</maven-plugin-annotations.version>
         <plexus-utils.version>3.3.0</plexus-utils.version>
 
         <!-- Test -->
@@ -54,14 +54,14 @@
 
         <!-- Plugins -->
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-        <maven-plugin-plugin.version>3.6.0</maven-plugin-plugin.version>
+        <maven-plugin-plugin.version>3.6.1</maven-plugin-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
-        <maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version>
+        <maven-javadoc-plugin.version>3.3.0</maven-javadoc-plugin.version>
         <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
-        <jacoco-maven-plugin.version>0.8.6</jacoco-maven-plugin.version>
+        <jacoco-maven-plugin.version>0.8.7</jacoco-maven-plugin.version>
         <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
-        <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
-        <detekt-maven-plugin.version>1.15.0.1</detekt-maven-plugin.version>
+        <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
+        <detekt-maven-plugin.version>1.17.0</detekt-maven-plugin.version>
     </properties>
 
     <dependencies>

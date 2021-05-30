@@ -1,0 +1,31 @@
+version: 2
+updates:
+- package-ecosystem: maven
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "04:00"
+  open-pull-requests-limit: 10
+  reviewers:
+  - ozsie
+  assignees:
+  - ozsie
+  ignore:
+  - dependency-name: org.apache.maven.plugins:maven-surefire-plugin
+    versions:
+    - "> 2.19.1"
+  - dependency-name: org.jetbrains.kotlin:kotlin-maven-plugin
+    versions:
+    - 1.4.21-2
+  - dependency-name: org.jetbrains.kotlin:kotlin-maven-allopen
+    versions:
+    - 1.4.21-2
+  - dependency-name: org.jetbrains.kotlin:kotlin-test
+    versions:
+    - 1.4.21-2
+  - dependency-name: org.jetbrains.kotlin:kotlin-reflect
+    versions:
+    - 1.4.21-2
+  - dependency-name: org.jetbrains.kotlin:kotlin-stdlib-jdk8
+    versions:
+    - 1.4.21-2
