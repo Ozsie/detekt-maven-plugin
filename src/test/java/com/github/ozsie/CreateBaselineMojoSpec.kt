@@ -24,8 +24,8 @@ class CreateBaselineMojoSpec : Spek({
         val createBaselineMojo = CreateBaselineMojo()
         createBaselineMojo.skip = false
         on("createBaselineMojo.execute()") {
-            test("ParameterException is thrown") {
-                assertFailsWith(ParameterException::class) {
+            test("unit is expected") {
+                expect(Unit) {
                     createBaselineMojo.execute()
                 }
             }
@@ -48,8 +48,8 @@ class CreateBaselineMojoSpec : Spek({
         val createBaselineMojo = CBMojo()
         createBaselineMojo.skip = false
         on("createBaselineMojo.execute()") {
-            test("ParameterException is thrown") {
-                assertFailsWith(ParameterException::class) {
+            test("unit is expected") {
+                expect(Unit) {
                     createBaselineMojo.execute()
                 }
             }
