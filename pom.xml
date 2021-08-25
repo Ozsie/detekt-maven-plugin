@@ -376,7 +376,7 @@
         <repository>
             <id>sonatype</id>
             <name>Sonatype OSS</name>
-            <url>https://oss.sonatype.org/</url>
+            <url>https://oss.sonatype.org/repositories/releases</url>
         </repository>
     </repositories>
 
@@ -384,7 +384,7 @@
         <pluginRepository>
             <id>sonatype</id>
             <name>Sonatype OSS</name>
-            <url>https://oss.sonatype.org/</url>
+            <url>https://oss.sonatype.org/repositories/releases</url>
         </pluginRepository>
     </pluginRepositories>
 
