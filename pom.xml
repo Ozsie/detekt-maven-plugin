@@ -372,22 +372,6 @@
         <tag>HEAD</tag>
     </scm>
 
-    <repositories>
-        <repository>
-            <id>sonatype</id>
-            <name>Sonatype OSS</name>
-            <url>https://oss.sonatype.org/repositories/releases</url>
-        </repository>
-    </repositories>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>sonatype</id>
-            <name>Sonatype OSS</name>
-            <url>https://oss.sonatype.org/repositories/releases</url>
-        </pluginRepository>
-    </pluginRepositories>
-
     <distributionManagement>
         <snapshotRepository>
             <id>ossrh</id>
