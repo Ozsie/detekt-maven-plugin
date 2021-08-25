@@ -61,7 +61,7 @@
         <jacoco-maven-plugin.version>0.8.7</jacoco-maven-plugin.version>
         <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
         <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
-        <detekt-maven-plugin.version>1.17.1.1</detekt-maven-plugin.version>
+        <detekt-maven-plugin.version>1.17.1.1-SNAPSHOT</detekt-maven-plugin.version>
     </properties>
 
     <dependencies>
@@ -371,6 +371,22 @@
         <developerConnection>scm:git:https://github.com/ozsie/detekt-maven-plugin.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
+
+    <repositories>
+        <repository>
+            <id>sonatype</id>
+            <name>Sonatype OSS</name>
+            <url>https://oss.sonatype.org/</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>sonatype</id>
+            <name>Sonatype OSS</name>
+            <url>https://oss.sonatype.org/</url>
+        </pluginRepository>
+    </pluginRepositories>
 
     <distributionManagement>
         <snapshotRepository>
