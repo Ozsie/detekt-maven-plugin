@@ -34,7 +34,7 @@ const val SEMICOLON = ";"
 
 abstract class DetektMojo : AbstractMojo() {
 
-    @Parameter(defaultValue = "false")
+    @Parameter(property= "detekt.skip", defaultValue = "false")
     var skip = false
 
     @Parameter(property = "detekt.baseline", defaultValue = "")
