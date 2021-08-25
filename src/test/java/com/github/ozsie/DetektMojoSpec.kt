@@ -6,6 +6,7 @@ import com.nhaarman.mockito_kotlin.mock
 import org.apache.maven.model.Dependency
 import org.apache.maven.model.Plugin
 import org.apache.maven.plugin.logging.Log
+import org.apache.maven.plugin.logging.SystemStreamLog
 import org.apache.maven.project.MavenProject
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.given
@@ -92,7 +93,7 @@ object DetektMojoSpec : Spek({
 
         val stringList = arrayListOf("x.y:y", "a.b:b", "c.d:d")
         on("buildPluginPaths") {
-            val pluginPath = stringList.buildPluginPaths(mavenProject, "~/.m2")
+            val pluginPath = stringList.buildPluginPaths(mavenProject, "~/.m2", SystemStreamLog())
             test("StringBuilder.buildPLuginPaths should be called") {
                 assertEquals("~/.m2/a/b/b/1/b-1.jar", pluginPath)
             }

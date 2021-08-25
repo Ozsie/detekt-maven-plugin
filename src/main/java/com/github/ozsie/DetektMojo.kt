@@ -123,7 +123,8 @@ abstract class DetektMojo : AbstractMojo() {
                 .useIf(report.isNotEmpty(), reportsToArgList(report))
                 .useIf(buildUponDefaultConfig, BUILD_UPON_DEFAULT_CONFIG)
                 .useIf(failFast, FAIL_FAST)
-                .useIf(plugins.isNotEmpty(), PLUGINS, plugins.buildPluginPaths(mavenProject, localRepoLocation))
+                .useIf(plugins.isNotEmpty(), PLUGINS,
+                    plugins.buildPluginPaths(mavenProject, localRepoLocation, this@DetektMojo.log))
                 .useIf(autoCorrect, AUTO_CORRECT)
                 .useIf(classPath.isNotEmpty(), CLASS_PATH, classPath)
                 .useIf(excludes.isNotEmpty(), EXCLUDES, excludes)
