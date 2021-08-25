@@ -372,22 +372,6 @@
         <tag>HEAD</tag>
     </scm>
 
-    <repositories>
-        <repository>
-            <id>jcenter</id>
-            <name>JCenter Repository</name>
-            <url>https://jcenter.bintray.com/</url>
-        </repository>
-    </repositories>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>jcenter</id>
-            <name>JCenter Repository</name>
-            <url>https://jcenter.bintray.com/</url>
-        </pluginRepository>
-    </pluginRepositories>
-
     <distributionManagement>
         <snapshotRepository>
             <id>ossrh</id>
