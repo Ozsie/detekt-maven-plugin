@@ -30,6 +30,7 @@ internal fun ArrayList<String>.buildPluginPaths(mavenProject: MavenProject?, loc
                 if (plugin != null) {
                     log.debug("$plugin")
                     this.buildPluginPaths(this@buildPluginPaths, plugin, localRepoLocation)
-                } else throw MavenExecutionException("No plugin defined", NullPointerException())
+                } else throw MavenExecutionException("No plugin defined",
+                    NullPointerException("Null returned when looking up plugin"))
             }
         }.toString().removeSuffix(SEMICOLON)
