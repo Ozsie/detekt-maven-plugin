@@ -22,9 +22,9 @@ open class CreateBaselineMojo : DetektMojo() {
     private val cliString get() = getCliSting().apply {
         add(CREATE_BASELINE)
         if (!contains(BASELINE)) {
-            log.debug("Baseline flag not present")
+            log.debug("Baseline flag not present for ${mavenProject?.name}")
             add(BASELINE)
-            add("baseline.xml")
+            add("baseline-${mavenProject?.name}.xml")
         }
     }.log().toTypedArray()
 }
