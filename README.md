@@ -135,9 +135,36 @@ standalone
     </plugins>
 </build>
 ```
+## Set baseline
+First a baseline file needs to be generated
+```bash
+mvn detekt:cb
+```
+This will generate a baseline file for each module named as `baseline-<module-name>.xml`. For more information on generating baselines, see [create-baseline](#create-baseline). You can now reference the baseline file in your configuration, as below.
+
+```xml
+<build>
+    <plugins>
+        <plugin>
+            <groupId>com.github.ozsie</groupId>
+            <artifactId>detekt-maven-plugin</artifactId>
+            <version>1.18.1</version>
+            <configuration>
+                <baseline>baseline.xml</baseline>
+            </configuration>
+            <executions>
+                <execution>
+                    <phase>verify</phase>
+                    <goals><goal>check</goal></goals>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
+```
 
 ### Goals
-***check***
+#### check
 
 Used to run detekt. All cli parameters, excluding -gc and -cb, are available using -Ddetekt.{parameter}
 
@@ -146,7 +173,7 @@ _Examples_
  * `mvn detekt:check -Ddetekt.config=detekt.yml`
  * `mvn detekt:check -Ddetekt.debug=true`
 
-***create-baseline***
+#### create-baseline
 
 Used to create a baseline. All cli parameters, excluding -gc and -cb,
 are available using -Ddetekt.{parameter}. By default, a file called
@@ -161,7 +188,7 @@ _Examples_
 *  `mvn detekt:create-baseline -Ddetekt.config=detekt.yml`
  * `mvn detekt:create-baseline -Ddetekt.debug=true`
 
-***generate-config***
+#### generate-config
 
 Used to generate a default configuration file
 
