@@ -6,7 +6,7 @@
 
 # Detekt Maven Plugin
 
-A maven plugin that wraps the Detekt CLI. It supports the same parameters as the Detekt CLI.
+A maven plugin that implementing Detekt for Maven. It supports the same parameters as the Detekt CLI.
 
 ## How to use
 ### Basic configuration
@@ -16,7 +16,7 @@ A maven plugin that wraps the Detekt CLI. It supports the same parameters as the
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.18.1.1</version>
+            <version>1.18.1.EXPERIMENTAL</version>
             <executions>
                 <execution>
                     <phase>verify</phase>
@@ -29,7 +29,7 @@ A maven plugin that wraps the Detekt CLI. It supports the same parameters as the
 ```
 Using the above configuration, Detekt will scan source files in _${basedir}/src_ and output the results in _${basedir}/detekt_.
 
-All parameters available to Detekt version _1.18.1.1_ can be configured in
+All parameters available to Detekt version _1.18.1.EXPERIMENTAL_ can be configured in
 the plugin.
 
 
@@ -40,7 +40,7 @@ the plugin.
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.18.1.1</version>
+            <version>1.18.1.EXPERIMENTAL</version>
             <executions>
                 <execution>
                     <phase>verify</phase>
@@ -65,7 +65,7 @@ Or
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.18.1.1</version>
+            <version>1.18.1.EXPERIMENTAL</version>
             <executions>
                 <execution>
                     <phase>verify</phase>
@@ -91,7 +91,7 @@ Or
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.18.1.1</version>
+            <version>1.18.1.EXPERIMENTAL</version>
             <executions>
                 <execution>
                     <phase>verify</phase>
@@ -118,7 +118,7 @@ standalone
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.18.1.1</version>
+            <version>1.18.1.EXPERIMENTAL</version>
             <configuration>
                 <report>
                     <report>txt:reports/detekt.txt</report>
@@ -148,7 +148,7 @@ This will generate a baseline file for each module named as `baseline-<module-na
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.18.1.1</version>
+            <version>1.18.1.EXPERIMENTAL</version>
             <configuration>
                 <baseline>baseline.xml</baseline>
             </configuration>
