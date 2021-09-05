@@ -3,8 +3,7 @@ package com.github.ozsie
 import io.github.detekt.tooling.api.spec.RulesSpec
 import io.github.detekt.tooling.dsl.ProcessingSpecBuilder
 import io.gitlab.arturbosch.detekt.api.commaSeparatedPattern
-import io.gitlab.arturbosch.detekt.cli.MultipleClasspathResourceConverter
-import io.gitlab.arturbosch.detekt.cli.MultipleExistingPathConverter
+import org.apache.maven.BuildFailureException
 import org.apache.maven.project.MavenProject
 import kotlin.io.path.Path
 
@@ -55,8 +54,11 @@ internal fun ProcessingSpecBuilder.buildExtensions(checkMojo: CheckMojo,
         disableDefaultRuleSets = checkMojo.disableDefaultRuleSets
         val pluginPaths = checkMojo.plugins
             .buildPluginPaths(mavenProject, localRepoLocation, checkMojo.log)
-        if (pluginPaths.isNotBlank()) fromPaths {
-            pluginPaths.let { MultipleExistingPathConverter().convert(it) }
+            .split(SEMICOLON)
+            .filter { it.isNotBlank() }
+            .map { Path(it) }
+        fromPaths {
+            pluginPaths
         }
     }
 }
@@ -65,14 +67,15 @@ internal fun ProcessingSpecBuilder.buildConfig(checkMojo: CheckMojo,
                                                mavenProject: MavenProject?) {
     config {
         configPaths = if (checkMojo.config.isNotBlank())
-            resolveConfig(mavenProject, checkMojo.config)
-                .let { MultipleExistingPathConverter().convert(it) }
+            listOf(Path(resolveConfig(mavenProject, checkMojo.config)))
         else emptyList()
         knownPatterns = emptyList()
         useDefaultConfig = checkMojo.buildUponDefaultConfig
         shouldValidateBeforeAnalysis = false
         resources = if (checkMojo.configResource.isNotBlank())
-            checkMojo.configResource.let { MultipleClasspathResourceConverter().convert(it) }
+            listOf(javaClass.getResource(checkMojo.configResource)
+                ?: throw BuildFailureException("Classpath resource '${checkMojo.configResource}' does not exist!")
+            )
         else emptyList()
     }
 }
