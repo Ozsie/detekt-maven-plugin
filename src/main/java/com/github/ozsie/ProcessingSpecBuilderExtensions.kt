@@ -61,10 +61,12 @@ internal fun ProcessingSpecBuilder.buildExtensions(checkMojo: CheckMojo,
     }
 }
 
-internal fun ProcessingSpecBuilder.buildConfig(checkMojo: CheckMojo) {
+internal fun ProcessingSpecBuilder.buildConfig(checkMojo: CheckMojo,
+                                               mavenProject: MavenProject?) {
     config {
         configPaths = if (checkMojo.config.isNotBlank())
-            checkMojo.config.let { MultipleExistingPathConverter().convert(it) }
+            resolveConfig(mavenProject, checkMojo.config)
+                .let { MultipleExistingPathConverter().convert(it) }
         else emptyList()
         knownPatterns = emptyList()
         useDefaultConfig = checkMojo.buildUponDefaultConfig

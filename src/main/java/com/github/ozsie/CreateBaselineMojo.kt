@@ -13,7 +13,7 @@ open class CreateBaselineMojo : DetektMojo() {
             buildProcessingSpec().also { spec ->
                 DetektProvider.load().get(spec).run()
             }
-        }
+        } else inputSkipLog(skip)
     }
 
     private fun buildProcessingSpec() = ProcessingSpec {

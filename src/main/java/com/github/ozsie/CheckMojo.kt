@@ -16,9 +16,6 @@ import java.nio.file.Paths
         requiresDependencyCollection = ResolutionScope.TEST)
 class CheckMojo : DetektMojo() {
     override fun execute() {
-        getCliSting().forEach {
-            log.debug("Applying $it")
-        }
         val foundInputDir = Files.isDirectory(Paths.get(input))
         if (!skip && foundInputDir)
             failBuildIfNeeded {
@@ -44,17 +41,13 @@ class CheckMojo : DetektMojo() {
         }
     }
 
-    private fun inputSkipLog(skip: Boolean) {
-        if (skip) log.info("Skipping execution") else log.info("Input directory '$input' not found, skipping module")
-    }
-
     private fun buildProcessingSpec() = ProcessingSpec {
         buildLogging(this@CheckMojo)
         buildExecution(this@CheckMojo)
         buildBaseline(this@CheckMojo)
         buildProject(this@CheckMojo)
         buildRules(this@CheckMojo)
-        buildConfig(this@CheckMojo)
+        buildConfig(this@CheckMojo, mavenProject)
         buildExtensions(this@CheckMojo, mavenProject, localRepoLocation)
         buildReports(this@CheckMojo)
         buildCompiler(this@CheckMojo)

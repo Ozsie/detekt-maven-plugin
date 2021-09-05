@@ -5,7 +5,6 @@ import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock
 import org.apache.maven.model.Dependency
 import org.apache.maven.model.Plugin
-import org.apache.maven.plugin.logging.Log
 import org.apache.maven.plugin.logging.SystemStreamLog
 import org.apache.maven.project.MavenProject
 import org.jetbrains.spek.api.Spek
@@ -14,16 +13,6 @@ import org.jetbrains.spek.api.dsl.on
 import kotlin.test.assertEquals
 
 object DetektMojoSpec : Spek({
-    given("an ArrayList") {
-        val arrayList = arrayListOf("a", "b", "c")
-
-        on("useIf") {
-            arrayList.useIf(true, "d")
-            test("length should match") {
-                assertEquals(4, arrayList.size)
-            }
-        }
-    }
 
     given("a StringBuilder") {
         val sb = StringBuilder()
@@ -96,17 +85,6 @@ object DetektMojoSpec : Spek({
             val pluginPath = stringList.buildPluginPaths(mavenProject, "~/.m2", SystemStreamLog())
             test("StringBuilder.buildPLuginPaths should be called") {
                 assertEquals("~/.m2/a/b/b/1/b-1.jar", pluginPath)
-            }
-        }
-    }
-
-    given("an ArrayList<T>") {
-        val log: Log = mock {}
-        val stringList = arrayListOf("x.y:y", "a.b:b", "c.d:d")
-        on("log") {
-            val listAfterLog = stringList.log(log)
-            test("list should not be modified") {
-                assertEquals(stringList, listAfterLog)
             }
         }
     }
