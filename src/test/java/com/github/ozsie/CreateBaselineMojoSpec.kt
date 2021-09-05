@@ -1,10 +1,10 @@
 package com.github.ozsie
 
-import com.beust.jcommander.ParameterException
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.given
 import org.jetbrains.spek.api.dsl.on
-import kotlin.test.assertFailsWith
+import java.io.File
+import kotlin.test.assertTrue
 import kotlin.test.expect
 
 class CreateBaselineMojoSpec : Spek({
@@ -52,6 +52,20 @@ class CreateBaselineMojoSpec : Spek({
                 expect(Unit) {
                     createBaselineMojo.execute()
                 }
+            }
+        }
+    }
+
+    given("a CreateBaselineMojo and 'skip' is false") {
+        val createBaselineMojo = CreateBaselineMojo()
+        createBaselineMojo.skip = false
+        createBaselineMojo.baseline = "baseline.xml"
+        on("generateConfigMojo.execute()") {
+            test("Config file is generated") {
+                createBaselineMojo.execute()
+                val file = File("baseline.xml")
+                assertTrue(file.exists())
+                file.deleteOnExit()
             }
         }
     }
