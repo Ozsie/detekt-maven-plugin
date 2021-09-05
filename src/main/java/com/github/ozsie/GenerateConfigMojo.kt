@@ -1,18 +1,16 @@
 package com.github.ozsie
 
-import io.gitlab.arturbosch.detekt.cli.parseArguments
-import io.gitlab.arturbosch.detekt.cli.runners.ConfigExporter
+import io.github.detekt.tooling.api.DefaultConfigurationProvider
 import org.apache.maven.plugins.annotations.Mojo
+import java.nio.file.Paths
 
 @Suppress("unused")
 @Mojo(name = "generate-config")
 open class GenerateConfigMojo : DetektMojo() {
     override fun execute() {
-        val cliArgs = parseArguments(getCliSting().log().toTypedArray())
-        log.info("Args: $cliArgs")
-        ConfigExporter(cliArgs, System.out).run {
-            if (!skip) return execute()
-        }
+        val path = if (this.config.isBlank()) "detekt.yml" else this.config
+        val configPath = Paths.get(path)
+        DefaultConfigurationProvider.load().copy(configPath)
     }
 }
 
