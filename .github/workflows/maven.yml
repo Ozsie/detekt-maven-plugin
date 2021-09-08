@@ -18,7 +18,7 @@ jobs:
     - uses: actions/setup-java@v1
       with:
         java-version: ${{ matrix.java-version }}
-    - run: mvn -B install --no-transfer-progress --file pom.xml -DskipTests -Ddetekt.skip
+    - run: "mvn -B install --no-transfer-progress --file pom.xml -DskipTests -Ddetekt.skip"
   test:
     needs: build
     strategy:
@@ -31,7 +31,7 @@ jobs:
     - uses: actions/setup-java@v1
       with:
         java-version: ${{ matrix.java-version }}
-    - run: mvn -B test --no-transfer-progress --file pom.xml
+    - run: "mvn -B test --no-transfer-progress --file pom.xml"
     - uses: codecov/codecov-action@v1
   detekt:
     needs: build
@@ -45,4 +45,4 @@ jobs:
       - uses: actions/setup-java@v1
         with:
           java-version: ${{ matrix.java-version }}
-      - run: mvn -B detekt:check --no-transfer-progress --file pom.xml
+      - run: "mvn -B detekt:check --no-transfer-progress --file pom.xml"
