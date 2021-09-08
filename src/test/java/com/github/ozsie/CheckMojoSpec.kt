@@ -4,13 +4,17 @@ import io.github.detekt.tooling.api.MaxIssuesReached
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.given
 import org.jetbrains.spek.api.dsl.on
+import java.net.URI
+import java.nio.file.Paths
 import kotlin.test.assertFailsWith
 import kotlin.test.expect
 
+
 class CheckMojoSpec : Spek({
     val invalidPackageNamingDirectoryPath by lazy {
-        CheckMojoSpec::class.java.classLoader.getResource("code-samples/invalid-package-naming")!!
-            .file
+        val uri = CheckMojoSpec::class.java.classLoader
+                .getResource("code-samples/invalid-package-naming")!!.toURI()
+        Paths.get(uri).toString()
     }
 
     given("a CheckMojo and 'skip' is true") {
