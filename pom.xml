@@ -193,7 +193,6 @@
                         <groupId>org.jetbrains.kotlin</groupId>
                         <artifactId>kotlin-maven-allopen</artifactId>
                         <version>${kotlin.version}</version>
-            		<scope>provided</scope>
                     </dependency>
                 </dependencies>
             </plugin>
@@ -286,13 +285,11 @@
                         <groupId>org.junit.platform</groupId>
                         <artifactId>junit-platform-surefire-provider</artifactId>
                         <version>${junit-platform-surefire-provider.version}</version>
-            		<scope>provided</scope>
                     </dependency>
                     <dependency>
                         <groupId>org.jetbrains.spek</groupId>
                         <artifactId>spek-junit-platform-engine</artifactId>
                         <version>${spek-api.version}</version>
-            		<scope>provided</scope>
                         <exclusions>
                             <exclusion>
                                 <groupId>org.jetbrains.kotlin</groupId>
