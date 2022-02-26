@@ -5,8 +5,11 @@ import org.jetbrains.spek.api.dsl.given
 import org.jetbrains.spek.api.dsl.on
 import java.io.File
 import java.io.FileNotFoundException
+import java.nio.file.Files
+import java.nio.file.Paths
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.assertTrue
 
 // Note: while annoying, the use of File() in the asserts should maximize cross-platform compatibility
 object ResolveConfigSpec : Spek({
@@ -95,6 +98,33 @@ object ResolveConfigSpec : Spek({
                         "${File(parentDir, "one.yml")};${File(basedir, "three.yml")}",
                         result
                     )
+                }
+            }
+        }
+    }
+
+    given("remote config file") {
+        val project = projectWithBasedirAt("resolve-config")
+
+        given("remote file exists") {
+            val config = "https://artifactory.example.com/detket/detekt-with-complexity-report.yml"
+            on("resolveConfig") {
+                val result = resolveConfig(project, config)
+                test("resolves the remote file") {
+                    assertEquals(EXPORTED_FILE_LOCATION, result)
+                    assertTrue(Files.exists(Paths.get(project.basedir.absolutePath + EXPORTED_FILE_LOCATION)))
+                }
+            }
+        }
+
+        given("remote file does not exist") {
+            val config = "https://artifactory.example.com/detket/detekt-with-complexity-report-2.yml"
+            on("resolveConfig") {
+                val exception = assertFailsWith<FileNotFoundException> {
+                    resolveConfig(project, config)
+                }
+                test("resolves the remote file") {
+                    assertEquals(config, exception.message)
                 }
             }
         }
