@@ -107,7 +107,7 @@ object ResolveConfigSpec : Spek({
         val project = projectWithBasedirAt("resolve-config")
 
         given("remote file exists") {
-            val config = "https://artifactory.example.com/detket/detekt-with-complexity-report.yml"
+            val config = "https://raw.githubusercontent.com/yonbav/detekt-maven-plugin/master/src/test/resources/resolve-config/remote/remote-config.yml"
             on("resolveConfig") {
                 val result = resolveConfig(project, config)
                 test("resolves the remote file") {
@@ -118,7 +118,7 @@ object ResolveConfigSpec : Spek({
         }
 
         given("remote file does not exist") {
-            val config = "https://artifactory.example.com/detket/detekt-with-complexity-report-2.yml"
+            val config = "https://raw.githubusercontent.com/yonbav/detekt-maven-plugin/master/src/test/resources/resolve-config/remote/not-exist-config.yml"
             on("resolveConfig") {
                 val exception = assertFailsWith<FileNotFoundException> {
                     resolveConfig(project, config)
