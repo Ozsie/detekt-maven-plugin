@@ -8,7 +8,7 @@ import java.nio.file.Files
 import java.nio.file.Paths
 import java.nio.file.StandardCopyOption
 
-const val EXPORTED_FILE_LOCATION = "/remote_detekt_config.yml"
+const val EXPORTED_FILE_LOCATION = "/remote-detekt-config.yml"
 
 internal fun resolveConfig(project: MavenProject?, config: String): String {
     if (project == null) return config
