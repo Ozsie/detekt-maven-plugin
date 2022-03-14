@@ -5,9 +5,15 @@ import org.jetbrains.spek.api.dsl.given
 import org.jetbrains.spek.api.dsl.on
 import java.io.File
 import java.io.FileNotFoundException
+import java.nio.file.Files
+import java.nio.file.Paths
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.assertTrue
 
+const val REMOTE_REPO = "https://raw.githubusercontent.com/yonbav/detekt-maven-plugin/master"
+const val REMOTE_CONFIG_URL =
+    "$REMOTE_REPO/src/test/resources/resolve-config/remote/remote-config.yml"
 // Note: while annoying, the use of File() in the asserts should maximize cross-platform compatibility
 object ResolveConfigSpec : Spek({
 
@@ -95,6 +101,33 @@ object ResolveConfigSpec : Spek({
                         "${File(parentDir, "one.yml")};${File(basedir, "three.yml")}",
                         result
                     )
+                }
+            }
+        }
+    }
+
+    given("remote config file") {
+        val project = projectWithBasedirAt("resolve-config")
+
+        given("remote file exists") {
+            on("resolveConfig") {
+                val result = resolveConfig(project, REMOTE_CONFIG_URL)
+                val expected = project.basedir.absolutePath + EXPORTED_FILE_LOCATION
+                test("resolves the remote file") {
+                    assertEquals(expected, result)
+                    assertTrue(Files.exists(Paths.get(project.basedir.absolutePath + EXPORTED_FILE_LOCATION)))
+                }
+            }
+        }
+
+        given("remote file does not exist") {
+            val config = "$REMOTE_REPO/does-not-exist.yml"
+            on("resolveConfig") {
+                val exception = assertFailsWith<FileNotFoundException> {
+                    resolveConfig(project, config)
+                }
+                test("resolves the remote file") {
+                    assertEquals(config, exception.message)
                 }
             }
         }

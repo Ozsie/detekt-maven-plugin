@@ -1,0 +1,52 @@
+build:
+  maxIssues: 0
+  excludeCorrectable: false
+  weights:
+
+config:
+  validation: true
+  warningsAsErrors: false
+  excludes: ''
+
+processors:
+  active: true
+  exclude:
+    - 'DetektProgressListener'
+
+console-reports:
+  active: true
+  exclude:
+    - 'ProjectStatisticsReport'
+    - 'ComplexityReport'
+    - 'NotificationReport'
+    # - 'FindingsReport'
+    # - 'CodeComplexityReport'
+    - 'FileBasedFindingsReport'
+    - 'LiteFindingsReport'
+
+output-reports:
+  active: true
+  exclude:
+    - 'XmlOutputReport'
+    - 'HtmlOutputReport'
+    - 'SarifOutputReport'
+    - 'TxtOutputReport'
+
+complexity:
+  active: true
+  ComplexMethod:
+    active: true
+    threshold: 0
+    ignoreSingleWhenExpression: false
+    ignoreSimpleWhenEntries: false
+    ignoreNestingFunctions: false
+    nestingFunctions:
+      - 'also'
+      - 'apply'
+      - 'forEach'
+      - 'isNotNull'
+      - 'ifNull'
+      - 'let'
+      - 'run'
+      - 'use'
+      - 'with'
