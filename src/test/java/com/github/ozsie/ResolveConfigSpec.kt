@@ -11,9 +11,9 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertTrue
 
-const val REMOTE_REPO = "https://raw.githubusercontent.com/Ozsie/detekt-maven-plugin/fd0de6d59e6ae1e062a9d2b030a171da1d3225ab"
-const val REMOTE_CONFIG_URL =
-    "$REMOTE_REPO/src/test/resources/resolve-config/remote/remote-config.yml"
+const val REMOTE_HOST = "https://raw.githubusercontent.com"
+const val REMOTE_REPO = "$REMOTE_HOST/Ozsie/detekt-maven-plugin/fd0de6d59e6ae1e062a9d2b030a171da1d3225ab"
+const val REMOTE_CONFIG_URL = "$REMOTE_REPO/src/test/resources/resolve-config/remote/remote-config.yml"
 // Note: while annoying, the use of File() in the asserts should maximize cross-platform compatibility
 object ResolveConfigSpec : Spek({
 
