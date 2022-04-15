@@ -4,7 +4,7 @@
 
     <groupId>com.github.ozsie</groupId>
     <artifactId>detekt-maven-plugin</artifactId>
-    <version>1.19.0.1</version>
+    <version>1.20.0</version>
     <packaging>maven-plugin</packaging>
 
     <name>detekt-maven-plugin Maven Plugin</name>
@@ -61,7 +61,7 @@
         <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
         <nexus-staging-maven-plugin.version>1.6.12</nexus-staging-maven-plugin.version>
         <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
-        <detekt-maven-plugin.version>1.19.0</detekt-maven-plugin.version>
+        <detekt-maven-plugin.version>1.19.0.1</detekt-maven-plugin.version>
     </properties>
 
     <dependencies>
