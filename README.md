@@ -187,49 +187,6 @@ This will generate a baseline file for each module named as `baseline-<module-na
 </build>
 ```
 
-## Using Type Resolution
-
-See [Issue #144](https://github.com/Ozsie/detekt-maven-plugin/issues/144) for an explanation.
-
-```xml
-<build>
-    <plugins>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-dependency-plugin</artifactId>
-            <version>3.2.0</version>
-            <executions>
-                <execution>
-                    <id>generate-classpath-var</id>
-                    <phase>package</phase>
-                    <goals><goal>build-classpath</goal></goals>
-                    <configuration>
-                        <outputProperty>generated.classpath</outputProperty>
-                        <silent>true</silent>
-                    </configuration>
-                </execution>
-            </executions>
-        </plugin>
-        <plugin>
-            <groupId>com.github.ozsie</groupId>
-            <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.21.0</version>
-            <configuration>
-                <baseline>baseline.xml</baseline>
-                <classPath>${generated.classpath}</classPath>
-                <jvmTarget>17</jvmTarget>
-            </configuration>
-            <executions>
-                <execution>
-                    <phase>verify</phase>
-                    <goals><goal>check</goal></goals>
-                </execution>
-            </executions>
-        </plugin>
-    </plugins>
-</build>
-```
-
 ### Goals
 #### check
 

@@ -2,7 +2,7 @@
 <SmellBaseline>
   <ManuallySuppressedIssues></ManuallySuppressedIssues>
   <CurrentIssues>
-    <ID>InvalidPackageDeclaration:WildcardImportViolated.kt$package `code-samples`.`invalid-package-naming`</ID>
+    <ID>PackageNaming:ValidFile.kt$package `code-samples`.`valid`</ID>
     <ID>PackageNaming:WildcardImportViolated.kt$package `code-samples`.`invalid-package-naming`</ID>
   </CurrentIssues>
 </SmellBaseline>
