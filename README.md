@@ -16,7 +16,7 @@ A maven plugin that wraps the Detekt CLI. It supports the same parameters as the
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.21.0</version>
+            <version>1.21.0.1</version>
             <executions>
                 <execution>
                     <phase>verify</phase>
@@ -29,7 +29,7 @@ A maven plugin that wraps the Detekt CLI. It supports the same parameters as the
 ```
 Using the above configuration, Detekt will scan source files in _${basedir}/src_ and output the results in _${basedir}/detekt_.
 
-All parameters available to Detekt version _1.21.0_ can be configured in
+All parameters available to Detekt version _1.21.0.1_ can be configured in
 the plugin.
 
 ### Remote configuration
@@ -40,7 +40,7 @@ The plugin supports remote config over http and https.
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.21.0</version>
+            <version>1.21.0.1</version>
             <executions>
                 <execution>
                     <phase>verify</phase>
@@ -64,7 +64,7 @@ The plugin supports remote config over http and https.
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.21.0</version>
+            <version>1.21.0.1</version>
             <executions>
                 <execution>
                     <phase>verify</phase>
@@ -89,7 +89,7 @@ Or
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.21.0</version>
+            <version>1.21.0.1</version>
             <executions>
                 <execution>
                     <phase>verify</phase>
@@ -115,7 +115,7 @@ Or
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.21.0</version>
+            <version>1.21.0.1</version>
             <executions>
                 <execution>
                     <phase>verify</phase>
@@ -142,7 +142,7 @@ standalone
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.21.0</version>
+            <version>1.21.0.1</version>
             <configuration>
                 <report>
                     <report>txt:reports/detekt.txt</report>
@@ -172,7 +172,7 @@ This will generate a baseline file for each module named as `baseline-<module-na
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.21.0</version>
+            <version>1.21.0.1</version>
             <configuration>
                 <baseline>baseline.xml</baseline>
             </configuration>
@@ -213,7 +213,7 @@ See [Issue #144](https://github.com/Ozsie/detekt-maven-plugin/issues/144) for an
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.21.0</version>
+            <version>1.21.0.1</version>
             <configuration>
                 <baseline>baseline.xml</baseline>
                 <classPath>${generated.classpath}</classPath>
@@ -267,19 +267,9 @@ _Example_
  For more information on Detekt, have a look at https://github.com/detekt/detekt
  
 ## Contributors
- * [andreysaksonov](https://github.com/andreysaksonov)
- * [Geminist](https://github.com/Geminist)
- * [josephlbarnett](https://github.com/josephlbarnett)
- * [reubenfirmin](https://github.com/reubenfirmin)
- * [schalkms](https://github.com/schalkms)
- * [ThatJoeMoore](https://github.com/ThatJoeMoore)
- * [va1m](https://github.com/va1m)
- * [vladimirfx](https://github.com/vladimirfx)
- * [pinkasey](https://github.com/pinkasey)
- * [krichter722](https://github.com/krichter722)
- * [currensy](https://github.com/currensy)
- * [rgrebski](https://github.com/rgrebski)
- * [yonbav](https://github.com/yonbav)
+<a href="https://github.com/detekt/detekt/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=ozsie/detekt-maven-plugin" />
+</a>
 
 ## License
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FOzsie%2Fdetekt-maven-plugin.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FOzsie%2Fdetekt-maven-plugin?ref=badge_large)
