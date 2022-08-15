@@ -1,22 +1,14 @@
 package com.github.ozsie
 
+import com.github.ozsie.test.CheckMojoTestFactory
 import io.github.detekt.tooling.api.MaxIssuesReached
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.given
 import org.jetbrains.spek.api.dsl.on
-import java.net.URI
-import java.nio.file.Paths
 import kotlin.test.assertFailsWith
 import kotlin.test.expect
 
-
 class CheckMojoSpec : Spek({
-    val invalidPackageNamingDirectoryPath by lazy {
-        val uri = CheckMojoSpec::class.java.classLoader
-                .getResource("code-samples/invalid-package-naming")!!.toURI()
-        Paths.get(uri).toString()
-    }
-
     given("a CheckMojo and 'skip' is true") {
         val checkMojo = CheckMojo()
         checkMojo.skip = true
@@ -42,11 +34,11 @@ class CheckMojoSpec : Spek({
     }
 
     given("a CheckMojo and 'failBuildOnMaxIssuesReached' is false") {
-        val checkMojo = CheckMojo().apply {
-            input = invalidPackageNamingDirectoryPath
+        val checkMojo = CheckMojoTestFactory.createWithInvalidPackageNamingStructure {
             failBuildOnMaxIssuesReached = false
-            failFast = true // fail on any issue
+            failFast = true
         }
+
         on("checkMojo.execute()") {
             test("Unit is expected") {
                 expect(Unit) {
@@ -57,15 +49,42 @@ class CheckMojoSpec : Spek({
     }
 
     given("a CheckMojo and 'failBuildOnMaxIssuesReached' is true") {
-        val checkMojo = CheckMojo().apply {
-            input = invalidPackageNamingDirectoryPath
+        val checkMojo = CheckMojoTestFactory.createWithInvalidPackageNamingStructure {
             failBuildOnMaxIssuesReached = true
-            failFast = true // fail on any issue
+            failFast = true
         }
         on("checkMojo.execute()") {
             test("Unit is expected") {
                 assertFailsWith(MaxIssuesReached::class, "Build failed with 1 weighted issues.") {
                     checkMojo.execute()
+                }
+            }
+        }
+    }
+
+    given("classpath parameter") {
+        val checkMojo = CheckMojoTestFactory.createWithNoRuleExecution {
+            classPath = "/tmp/provided"
+        }
+
+        on("checkMojo.execute()") {
+            test("uses provider value") {
+                expect("/tmp/provided") {
+                    checkMojo.execute()
+                    checkMojo.cliArgs.classpath
+                }
+            }
+        }
+    }
+
+    given("no classpath parameter") {
+        val checkMojo = CheckMojoTestFactory.createWithNoRuleExecution()
+
+        on("checkMojo.execute()") {
+            test("uses default compileClasspathElements") {
+                expect("/tmp/default${java.io.File.pathSeparatorChar}/tmp/default2") {
+                    checkMojo.execute()
+                    checkMojo.cliArgs.classpath
                 }
             }
         }
