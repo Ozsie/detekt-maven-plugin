@@ -39,7 +39,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- Compile -->
-        <kotlin.version>1.6.10</kotlin.version>
+        <kotlin.version>1.7.10</kotlin.version>
         <detekt.version>1.21.0</detekt.version>
         <jcommander.version>1.82</jcommander.version>
         <snakeyaml.version>1.21</snakeyaml.version>
