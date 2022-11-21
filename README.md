@@ -16,7 +16,7 @@ A maven plugin that wraps the Detekt CLI. It supports the same parameters as the
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.21.0.1</version>
+            <version>1.22.0</version>
             <executions>
                 <execution>
                     <phase>verify</phase>
@@ -29,7 +29,7 @@ A maven plugin that wraps the Detekt CLI. It supports the same parameters as the
 ```
 Using the above configuration, Detekt will scan source files in _${basedir}/src_ and output the results in _${basedir}/detekt_.
 
-All parameters available to Detekt version _1.21.0.1_ can be configured in
+All parameters available to Detekt version _1.21.0_ can be configured in
 the plugin.
 
 ### Remote configuration
@@ -40,7 +40,7 @@ The plugin supports remote config over http and https.
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.21.0.1</version>
+            <version>1.22.0</version>
             <executions>
                 <execution>
                     <phase>verify</phase>
@@ -64,7 +64,7 @@ The plugin supports remote config over http and https.
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.21.0.1</version>
+            <version>1.22.0</version>
             <executions>
                 <execution>
                     <phase>verify</phase>
@@ -89,7 +89,7 @@ Or
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.21.0.1</version>
+            <version>1.22.0</version>
             <executions>
                 <execution>
                     <phase>verify</phase>
@@ -115,7 +115,7 @@ Or
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.21.0.1</version>
+            <version>1.22.0</version>
             <executions>
                 <execution>
                     <phase>verify</phase>
@@ -142,7 +142,7 @@ standalone
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.21.0.1</version>
+            <version>1.22.0</version>
             <configuration>
                 <report>
                     <report>txt:reports/detekt.txt</report>
@@ -172,7 +172,7 @@ This will generate a baseline file for each module named as `baseline-<module-na
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.21.0.1</version>
+            <version>1.22.0</version>
             <configuration>
                 <baseline>baseline.xml</baseline>
             </configuration>
@@ -213,7 +213,7 @@ See [Issue #144](https://github.com/Ozsie/detekt-maven-plugin/issues/144) for an
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.21.0.1</version>
+            <version>1.22.0</version>
             <configuration>
                 <baseline>baseline.xml</baseline>
                 <classPath>${generated.classpath}</classPath>
@@ -222,7 +222,7 @@ See [Issue #144](https://github.com/Ozsie/detekt-maven-plugin/issues/144) for an
             <executions>
                 <execution>
                     <phase>verify</phase>
-                    <goals><goal>check</goal></goals>
+                    <goals><goal>ctr</goal></goals>
                 </execution>
             </executions>
         </plugin>
@@ -239,6 +239,11 @@ _Examples_
 
  * `mvn detekt:check -Ddetekt.config=detekt.yml`
  * `mvn detekt:check -Ddetekt.debug=true`
+
+If you need type resolution, use the following instead
+
+ * `mvn detekt:ctr -Ddetekt.config=detekt.yml`
+ * `mvn detekt:ctr -Ddetekt.debug=true`
 
 #### create-baseline
 
