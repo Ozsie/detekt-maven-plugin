@@ -41,7 +41,6 @@ class CheckMojoSpec : Spek({
         val checkMojo = CheckMojo().apply {
             input = invalidPackageNamingDirectoryPath
             failBuildOnMaxIssuesReached = false
-            failFast = true // fail on any issue
         }
         on("checkMojo.execute()") {
             test("Unit is expected") {
@@ -56,7 +55,6 @@ class CheckMojoSpec : Spek({
         val checkMojo = CheckMojo().apply {
             input = invalidPackageNamingDirectoryPath
             failBuildOnMaxIssuesReached = true
-            failFast = true // fail on any issue
         }
         on("checkMojo.execute()") {
             test("Unit is expected") {

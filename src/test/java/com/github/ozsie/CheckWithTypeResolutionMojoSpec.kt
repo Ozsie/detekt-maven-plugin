@@ -36,7 +36,6 @@ class CheckWithTypeResolutionMojoSpec : Spek({
     given("a CheckMojo and 'failBuildOnMaxIssuesReached' is false") {
         val checkMojo = CheckWithTypeResolutionMojoTestFactory.createWithInvalidPackageNamingStructure {
             failBuildOnMaxIssuesReached = false
-            failFast = true
         }
 
         on("checkMojo.execute()") {
@@ -51,7 +50,6 @@ class CheckWithTypeResolutionMojoSpec : Spek({
     given("a CheckMojo and 'failBuildOnMaxIssuesReached' is true") {
         val checkMojo = CheckWithTypeResolutionMojoTestFactory.createWithInvalidPackageNamingStructure {
             failBuildOnMaxIssuesReached = true
-            failFast = true
         }
         on("checkMojo.execute()") {
             test("Unit is expected") {
