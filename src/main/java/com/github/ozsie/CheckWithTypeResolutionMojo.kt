@@ -1,6 +1,7 @@
 package com.github.ozsie
 
 import io.github.detekt.tooling.api.MaxIssuesReached
+import io.gitlab.arturbosch.detekt.cli.CliArgs
 import io.gitlab.arturbosch.detekt.cli.parseArguments
 import io.gitlab.arturbosch.detekt.cli.runners.Runner
 import org.apache.maven.plugins.annotations.LifecyclePhase
@@ -10,21 +11,32 @@ import java.nio.file.Files
 import java.nio.file.Paths
 
 @Suppress("unused")
-@Mojo(name = "check",
-    defaultPhase = LifecyclePhase.VERIFY,
-    threadSafe = true,
-    requiresDependencyCollection = ResolutionScope.TEST)
-class CheckMojo : DetektMojo() {
+@Mojo(name = "check-with-type-resolution",
+        defaultPhase = LifecyclePhase.VERIFY,
+        threadSafe = true,
+        requiresDependencyCollection = ResolutionScope.TEST)
+open class CheckWithTypeResolutionMojo : DetektMojo() {
+    lateinit var cliArgs: CliArgs
+
     override fun execute() {
         getCliSting().forEach {
             log.debug("Applying $it")
         }
-        val cliArgs = parseArguments(getCliSting().log().toTypedArray())
+        this.cliArgs = parseArguments(getCliSting().log().toTypedArray())
+
         val foundInputDir = Files.isDirectory(Paths.get(input))
-        if (!skip && foundInputDir)
+        if (!skip && foundInputDir) {
+            setDefaultClasspathIfNotSet(cliArgs)
             failBuildIfNeeded { Runner(cliArgs, System.out, System.err).execute() }
-        else
+        } else
             inputSkipLog(skip)
+    }
+
+    private fun setDefaultClasspathIfNotSet(cliArgs: CliArgs) {
+        if (cliArgs.classpath.isNullOrBlank()) {
+            cliArgs.classpath = mavenProject?.compileClasspathElements?.joinToString(
+                java.io.File.pathSeparatorChar.toString())
+        }
     }
 
     private fun failBuildIfNeeded(block: () -> Unit) {
@@ -42,3 +54,5 @@ class CheckMojo : DetektMojo() {
         if (skip) log.info("Skipping execution") else log.info("Input directory '$input' not found, skipping module")
     }
 }
+
+@Suppress("unused") @Mojo(name = "ctr") class CTRMojo : CheckWithTypeResolutionMojo()
