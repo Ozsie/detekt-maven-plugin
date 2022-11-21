@@ -16,9 +16,9 @@ const val CONFIG_RESOURCE = "-cr"
 const val DEBUG = "--debug"
 const val DISABLE_DEFAULT_RULE_SET = "-dd"
 const val EXCLUDES = "-ex"
-const val FAIL_FAST = "--fail-fast"
 const val INCLUDES = "-in"
 const val INPUT = "-i"
+const val JDK_HOME = "--jdk-home"
 const val JVM_TARGET = "--jvm-target"
 const val LANGUAGE_VERSION = "--language-version"
 const val MAX_ISSUES = "--max-issues"
@@ -70,9 +70,6 @@ abstract class DetektMojo : AbstractMojo() {
     @Parameter(property = "detekt.buildUponDefaultConfig", defaultValue = "false")
     var buildUponDefaultConfig = false
 
-    @Parameter(property = "detekt.failFast", defaultValue = "false")
-    var failFast = false
-
     @Parameter(property = "detekt.report")
     var report = ArrayList<String>()
 
@@ -90,6 +87,9 @@ abstract class DetektMojo : AbstractMojo() {
 
     @Parameter(property = "detekt.includes")
     var includes = ""
+
+    @Parameter(property = "detekt.jdkHome")
+    var jdkHome = ""
 
     @Parameter(property = "detekt.jvmTarget")
     var jvmTarget = ""
@@ -122,13 +122,13 @@ abstract class DetektMojo : AbstractMojo() {
                 .useIf(input.isNotEmpty(), INPUT, input)
                 .useIf(report.isNotEmpty(), reportsToArgList(report))
                 .useIf(buildUponDefaultConfig, BUILD_UPON_DEFAULT_CONFIG)
-                .useIf(failFast, FAIL_FAST)
                 .useIf(plugins.isNotEmpty(), PLUGINS,
                     plugins.buildPluginPaths(mavenProject, localRepoLocation, this@DetektMojo.log))
                 .useIf(autoCorrect, AUTO_CORRECT)
                 .useIf(classPath.isNotEmpty(), CLASS_PATH, classPath)
                 .useIf(excludes.isNotEmpty(), EXCLUDES, excludes)
                 .useIf(includes.isNotEmpty(), INCLUDES, includes)
+                .useIf(jdkHome.isNotEmpty(), JDK_HOME, jdkHome)
                 .useIf(jvmTarget.isNotEmpty(), JVM_TARGET, jvmTarget)
                 .useIf(languageVersion.isNotEmpty(), LANGUAGE_VERSION, languageVersion)
                 .useIf(allRules, ALL_RULES)
