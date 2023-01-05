@@ -7,7 +7,7 @@
 # Detekt Maven Plugin
 
 A [Maven](https://maven.apache.org) [plugin](https://maven.apache.org/plugins/index.html) that wraps the [Detekt](https://detekt.dev/) CLI. It supports the same parameters as the [Detekt CLI](https://detekt.dev/docs/gettingstarted/cli).
- 
+
 ## How to use
 See [below](#goals) how to execute after configuring.
 
