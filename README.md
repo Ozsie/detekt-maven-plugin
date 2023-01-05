@@ -6,8 +6,8 @@
 
 # Detekt Maven Plugin
 
-A maven plugin that wraps the Detekt CLI. It supports the same parameters as the Detekt CLI.
-
+A [Maven](https://maven.apache.org) [plugin](https://maven.apache.org/plugins/index.html) that wraps the [Detekt](https://detekt.dev/) CLI. It supports the same parameters as the [Detekt CLI](https://detekt.dev/docs/gettingstarted/cli).
+ 
 ## How to use
 See [below](#goals) how to execute after configuring.
 
@@ -85,10 +85,10 @@ The plugin supports remote config over http and https.
 </build>
 ```
 
-### Using extensions
+### Extensions
 Detekt supports [rulesets, processors, reports, etc.](https://detekt.dev/docs/introduction/extensions) packaged in Detekt plugins.
 
-#### Using published Detekt plugins
+#### Published Detekt plugins
 See [Detekt Marketplace](https://detekt.dev/marketplace) for list of known plugins.
 
 ```xml
@@ -222,7 +222,7 @@ This will generate a baseline file for each module named as `baseline-<module-na
 </build>
 ```
 
-### Using Type Resolution
+### Type Resolution
 
 See [Issue #144](https://github.com/Ozsie/detekt-maven-plugin/issues/144) for an explanation.
 
@@ -297,15 +297,13 @@ _Examples_
 
 ### `generate-config`
 
-Used to generate a default configuration file
+Used to generate a default configuration file.
 
 _Example_
 
  * `mvn detekt:gc`
  * `mvn detekt:generate-config`
- 
- For more information on Detekt, have a look at https://github.com/detekt/detekt
- 
+
 ## Contributors
 <a href="https://github.com/detekt/detekt/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=ozsie/detekt-maven-plugin" />
