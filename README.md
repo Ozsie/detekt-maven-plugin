@@ -9,7 +9,9 @@
 A maven plugin that wraps the Detekt CLI. It supports the same parameters as the Detekt CLI.
 
 ## How to use
-### Basic configuration
+See [below](#goals) how to execute after configuring.
+
+### Basic usage
 ```xml
 <build>
     <plugins>
@@ -27,12 +29,38 @@ A maven plugin that wraps the Detekt CLI. It supports the same parameters as the
     </plugins>
 </build>
 ```
-Using the above configuration, Detekt will scan source files in _${basedir}/src_ and output the results in _${basedir}/detekt_.
+Using the above configuration Detekt will scan source files in `${basedir}/src` and output the results in `${basedir}/detekt`.  
 
-All parameters available to Detekt version _1.22.0_ can be configured in
-the plugin.
+## Configuration
+All parameters available to Detekt version _1.22.0_ can be configured in the plugin.
 
-### Remote configuration
+### Local rule configuration
+The plugin supports local files as configuration to be passed to Detekt.
+```xml
+<build>
+    <plugins>
+        <plugin>
+            <groupId>com.github.ozsie</groupId>
+            <artifactId>detekt-maven-plugin</artifactId>
+            <version>1.22.0</version>
+            <executions>
+                <execution>
+                    <phase>verify</phase>
+                    <goals><goal>check</goal></goals>
+                    <configuration>
+                        <plugins>
+                            <config>config/detekt/detekt.yml</config>
+                        </plugins>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
+```
+Multiple files can be listed with `;` as separator.
+
+### Remote rule configuration
 The plugin supports remote config over http and https.
 ```xml
 <build>
@@ -57,31 +85,11 @@ The plugin supports remote config over http and https.
 </build>
 ```
 
-### Using plugin
-```xml
-<build>
-    <plugins>
-        <plugin>
-            <groupId>com.github.ozsie</groupId>
-            <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.22.0</version>
-            <executions>
-                <execution>
-                    <phase>verify</phase>
-                    <goals><goal>check</goal></goals>
-                    <configuration>
-                        <plugins>
-                            <plugin>path/to/plugin.jar</plugin>
-                        </plugins>
-                    </configuration>
-                </execution>
-            </executions>
-        </plugin>
-    </plugins>
-</build>
-```
+### Using extensions
+Detekt supports [rulesets, processors, reports, etc.](https://detekt.dev/docs/introduction/extensions) packaged in Detekt plugins.
 
-Or
+#### Using published Detekt plugins
+See [Detekt Marketplace](https://detekt.dev/marketplace) for list of known plugins.
 
 ```xml
 <build>
@@ -97,10 +105,12 @@ Or
                 </execution>
             </executions>
             <dependencies>
+                <!-- Detekt's first-party unbundled plugin for library authors:
+                     https://detekt.dev/docs/next/rules/libraries -->
                 <dependency>
-                    <groupId>group</groupId>
-                    <artifactId>artifact</artifactId>
-                    <version>version</version>
+                    <groupId>io.gitlab.arturbosch.detekt</groupId>
+                    <artifactId>detekt-rules-libraries</artifactId>
+                    <version>1.22.0</version>
                 </dependency>
             </dependencies>
         </plugin>
@@ -108,7 +118,33 @@ Or
 </build>
 ```
 
-## Specify report files
+#### Local Detekt plugins
+```xml
+<build>
+    <plugins>
+        <plugin>
+            <groupId>com.github.ozsie</groupId>
+            <artifactId>detekt-maven-plugin</artifactId>
+            <version>1.22.0</version>
+            <executions>
+                <execution>
+                    <phase>verify</phase>
+                    <goals><goal>check</goal></goals>
+                    <configuration>
+                        <plugins>
+                            <plugin>local/path/to/plugin.jar</plugin>
+                        </plugins>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
+```
+
+### Reporting
+See [Detekt documentation](https://detekt.dev/docs/introduction/reporting) for supported report types.
+
 ```xml
 <build>
     <plugins>
@@ -132,10 +168,9 @@ Or
     </plugins>
 </build>
 ```
-Alternatively, the configuration can be placed outside of the
-`<executions>`. This allows the configuration be used when running goals
-standalone
 
+Alternatively, the configuration can be placed outside of the `<executions>`.
+This allows the configuration be used when running goals standalone.
 ```xml
 <build>
     <plugins>
@@ -159,13 +194,13 @@ standalone
     </plugins>
 </build>
 ```
-## Set baseline
-First a baseline file needs to be generated
+
+### Baseline
+First a [baseline file](https://detekt.dev/docs/introduction/baseline) needs to be generated:
 ```bash
 mvn detekt:cb
 ```
 This will generate a baseline file for each module named as `baseline-<module-name>.xml`. For more information on generating baselines, see [create-baseline](#create-baseline). You can now reference the baseline file in your configuration, as below.
-
 ```xml
 <build>
     <plugins>
@@ -187,7 +222,7 @@ This will generate a baseline file for each module named as `baseline-<module-na
 </build>
 ```
 
-## Using Type Resolution
+### Using Type Resolution
 
 See [Issue #144](https://github.com/Ozsie/detekt-maven-plugin/issues/144) for an explanation.
 
@@ -230,8 +265,8 @@ See [Issue #144](https://github.com/Ozsie/detekt-maven-plugin/issues/144) for an
 </build>
 ```
 
-### Goals
-#### check
+## Goals
+### `check`
 
 Used to run detekt. All cli parameters, excluding -gc and -cb, are available using -Ddetekt.{parameter}
 
@@ -245,7 +280,7 @@ If you need type resolution, use the following instead
  * `mvn detekt:ctr -Ddetekt.config=detekt.yml`
  * `mvn detekt:ctr -Ddetekt.debug=true`
 
-#### create-baseline
+### `create-baseline`
 
 Used to create a baseline. All cli parameters, excluding -gc and -cb,
 are available using -Ddetekt.{parameter}. By default, a file called
@@ -260,7 +295,7 @@ _Examples_
 *  `mvn detekt:create-baseline -Ddetekt.config=detekt.yml`
  * `mvn detekt:create-baseline -Ddetekt.debug=true`
 
-#### generate-config
+### `generate-config`
 
 Used to generate a default configuration file
 
