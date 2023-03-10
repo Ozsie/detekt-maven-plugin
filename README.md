@@ -48,9 +48,7 @@ The plugin supports local files as configuration to be passed to Detekt.
                     <phase>verify</phase>
                     <goals><goal>check</goal></goals>
                     <configuration>
-                        <plugins>
-                            <config>config/detekt/detekt.yml</config>
-                        </plugins>
+                        <config>config/detekt/detekt.yml</config>
                     </configuration>
                 </execution>
             </executions>
@@ -74,9 +72,7 @@ The plugin supports remote config over http and https.
                     <phase>verify</phase>
                     <goals><goal>check</goal></goals>
                     <configuration>
-                        <plugins>
-                            <config>https://raw.githubusercontent.com/Ozsie/detekt-maven-plugin/fd0de6d59e6ae1e062a9d2b030a171da1d3225ab/src/test/resources/resolve-config/remote/remote-config.yml</config>
-                        </plugins>
+                        <config>https://raw.githubusercontent.com/Ozsie/detekt-maven-plugin/fd0de6d59e6ae1e062a9d2b030a171da1d3225ab/src/test/resources/resolve-config/remote/remote-config.yml</config>
                     </configuration>
                 </execution>
             </executions>
