@@ -20,11 +20,13 @@ class CheckMojo : DetektMojo() {
             log.debug("Applying $it")
         }
         val cliArgs = parseArguments(getCliSting().log().toTypedArray())
-        val foundInputDir = Files.isDirectory(Paths.get(input))
-        if (!skip && foundInputDir)
+        val invalidInputDirs = input.split(",").mapNotNull {
+            if (!Files.isDirectory(Paths.get(it))) it else null
+        }
+        if (!skip && invalidInputDirs.isEmpty())
             failBuildIfNeeded { Runner(cliArgs, System.out, System.err).execute() }
         else
-            inputSkipLog(skip)
+            inputSkipLog(skip, invalidInputDirs)
     }
 
     private fun failBuildIfNeeded(block: () -> Unit) {
@@ -38,7 +40,11 @@ class CheckMojo : DetektMojo() {
         }
     }
 
-    private fun inputSkipLog(skip: Boolean) {
-        if (skip) log.info("Skipping execution") else log.info("Input directory '$input' not found, skipping module")
+    private fun inputSkipLog(skip: Boolean, invalidInputDirs: List<String>) {
+        if (skip) {
+            log.info("Skipping execution")
+        } else {
+            log.info("Failed to resolve input directories '${invalidInputDirs.joinToString()}', skipping module")
+        }
     }
 }
