@@ -20,13 +20,14 @@ class CheckMojo : DetektMojo() {
             log.debug("Applying $it")
         }
         val cliArgs = parseArguments(getCliSting().log().toTypedArray())
-        val invalidInputDirs = input.split(",").mapNotNull {
-            if (!Files.isDirectory(Paths.get(it))) it else null
+        val invalidInputs = input.split(",").filter {
+            val path = Paths.get(it)
+            !Files.isDirectory(Paths.get(it)) && !Files.exists(path)
         }
-        if (!skip && invalidInputDirs.isEmpty())
+        if (!skip && invalidInputs.isEmpty())
             failBuildIfNeeded { Runner(cliArgs, System.out, System.err).execute() }
         else
-            inputSkipLog(skip, invalidInputDirs)
+            inputSkipLog(skip, invalidInputs)
     }
 
     private fun failBuildIfNeeded(block: () -> Unit) {
