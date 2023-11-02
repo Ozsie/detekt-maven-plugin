@@ -18,7 +18,7 @@ See [below](#goals) how to execute after configuring.
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.23.1</version>
+            <version>1.23.3</version>
             <executions>
                 <execution>
                     <phase>verify</phase>
@@ -32,7 +32,7 @@ See [below](#goals) how to execute after configuring.
 Using the above configuration Detekt will scan source files in `${basedir}/src` and output the results in `${basedir}/detekt`.  
 
 ## Configuration
-All parameters available to Detekt version _1.23.1_ can be configured in the plugin.
+All parameters available to Detekt version _1.23.3_ can be configured in the plugin.
 
 ### Local rule configuration
 The plugin supports local files as configuration to be passed to Detekt.
@@ -42,7 +42,7 @@ The plugin supports local files as configuration to be passed to Detekt.
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.23.1</version>
+            <version>1.23.3</version>
             <executions>
                 <execution>
                     <phase>verify</phase>
@@ -66,7 +66,7 @@ The plugin supports remote config over http and https.
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.23.1</version>
+            <version>1.23.3</version>
             <executions>
                 <execution>
                     <phase>verify</phase>
@@ -93,7 +93,7 @@ See [Detekt Marketplace](https://detekt.dev/marketplace) for list of known plugi
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.23.1</version>
+            <version>1.23.3</version>
             <executions>
                 <execution>
                     <phase>verify</phase>
@@ -106,7 +106,7 @@ See [Detekt Marketplace](https://detekt.dev/marketplace) for list of known plugi
                 <dependency>
                     <groupId>io.gitlab.arturbosch.detekt</groupId>
                     <artifactId>detekt-rules-libraries</artifactId>
-                    <version>1.23.1</version>
+                    <version>1.23.3</version>
                 </dependency>
             </dependencies>
         </plugin>
@@ -121,7 +121,7 @@ See [Detekt Marketplace](https://detekt.dev/marketplace) for list of known plugi
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.23.1</version>
+            <version>1.23.3</version>
             <executions>
                 <execution>
                     <phase>verify</phase>
@@ -147,7 +147,7 @@ See [Detekt documentation](https://detekt.dev/docs/introduction/reporting) for s
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.23.1</version>
+            <version>1.23.3</version>
             <executions>
                 <execution>
                     <phase>verify</phase>
@@ -173,7 +173,7 @@ This allows the configuration be used when running goals standalone.
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.23.1</version>
+            <version>1.23.3</version>
             <configuration>
                 <report>
                     <report>txt:reports/detekt.txt</report>
@@ -203,7 +203,7 @@ This will generate a baseline file for each module named as `baseline-<module-na
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.23.1</version>
+            <version>1.23.3</version>
             <configuration>
                 <baseline>baseline.xml</baseline>
             </configuration>
@@ -244,7 +244,7 @@ See [Issue #144](https://github.com/Ozsie/detekt-maven-plugin/issues/144) for an
         <plugin>
             <groupId>com.github.ozsie</groupId>
             <artifactId>detekt-maven-plugin</artifactId>
-            <version>1.23.1</version>
+            <version>1.23.3</version>
             <configuration>
                 <baseline>baseline.xml</baseline>
                 <classPath>${generated.classpath}</classPath>
