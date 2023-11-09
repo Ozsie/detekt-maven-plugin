@@ -23,13 +23,15 @@ open class CheckWithTypeResolutionMojo : DetektMojo() {
             log.debug("Applying $it")
         }
         this.cliArgs = parseArguments(getCliSting().log().toTypedArray())
-
-        val foundInputDir = Files.isDirectory(Paths.get(input))
-        if (!skip && foundInputDir) {
+        val invalidInputs = input.split(",").filter {
+            val path = Paths.get(it)
+            !Files.isDirectory(Paths.get(it)) && !Files.exists(path)
+        }
+        if (!skip && invalidInputs.isEmpty()) {
             setDefaultClasspathIfNotSet(cliArgs)
             failBuildIfNeeded { Runner(cliArgs, System.out, System.err).execute() }
         } else
-            inputSkipLog(skip)
+            inputSkipLog(skip, invalidInputs)
     }
 
     private fun setDefaultClasspathIfNotSet(cliArgs: CliArgs) {
@@ -50,8 +52,12 @@ open class CheckWithTypeResolutionMojo : DetektMojo() {
         }
     }
 
-    private fun inputSkipLog(skip: Boolean) {
-        if (skip) log.info("Skipping execution") else log.info("Input directory '$input' not found, skipping module")
+    private fun inputSkipLog(skip: Boolean, invalidInputDirs: List<String>) {
+        if (skip) {
+            log.info("Skipping execution")
+        } else {
+            log.info("Failed to resolve input directories '${invalidInputDirs.joinToString()}', skipping module")
+        }
     }
 }
 
