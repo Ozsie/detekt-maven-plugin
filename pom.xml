@@ -60,7 +60,7 @@
         <maven-surefire-plugin.version>2.22.0</maven-surefire-plugin.version>
         <jacoco-maven-plugin.version>0.8.11</jacoco-maven-plugin.version>
         <nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
-        <maven-gpg-plugin.version>3.2.1</maven-gpg-plugin.version>
+        <maven-gpg-plugin.version>3.2.2</maven-gpg-plugin.version>
         <detekt-maven-plugin.version>1.23.4</detekt-maven-plugin.version>
     </properties>
 
