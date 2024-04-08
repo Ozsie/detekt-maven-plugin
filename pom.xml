@@ -44,7 +44,7 @@
         <jcommander.version>1.82</jcommander.version>
         <snakeyaml.version>1.21</snakeyaml.version>
         <maven.api.version>3.9.6</maven.api.version>
-        <maven-plugin-annotations.version>3.11.0</maven-plugin-annotations.version>
+        <maven-plugin-annotations.version>3.12.0</maven-plugin-annotations.version>
         <plexus-utils.version>3.5.1</plexus-utils.version>
 
         <!-- Test -->
