@@ -14,7 +14,7 @@ import kotlin.test.assertTrue
  * @throws AssertionError if resource does not exist
  */
 internal fun resolveTestResourcePath(path: String): File {
-    val url = ResolveConfigSpec::class.java.classLoader.getResource(path)
+    val url = ResolveConfigTestProjectTest::class.java.classLoader.getResource(path)
     assertNotNull(url, "Cannot find test resource path $path")
     return File(url.toURI())
 }
