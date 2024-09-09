@@ -301,7 +301,7 @@ _Example_
  * `mvn detekt:generate-config`
 
 ## Contributors
-<a href="https://github.com/detekt/detekt/graphs/contributors">
+<a href="https://github.com/ozsie/detekt-maven-plugin/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=ozsie/detekt-maven-plugin" alt="contributors"/>
 </a>
 
