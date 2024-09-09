@@ -136,12 +136,6 @@
             <version>${kotlin.version}</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-test</artifactId>
-	        <version>${kotlin.version}</version>
-            <scope>test</scope>
-        </dependency>
 
         <dependency>
             <groupId>com.nhaarman</groupId>
