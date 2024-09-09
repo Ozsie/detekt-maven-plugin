@@ -14,17 +14,17 @@ object CheckWithTypeResolutionMojoTestFactory {
 
     private val invalidPackageNamingDirectoryPath by lazy {
         val uri = CheckWithTypeResolutionMojoTest::class.java.classLoader
-            .getResource("code-samples/invalid-package-naming")!!.toURI()
+            .getResource("code-samples/invalid-package-naming")?.toURI() ?: error("Failed to load resource")
         Paths.get(uri).toString()
     }
 
     private val validPackageNamingDirectoryPath by lazy {
         val uri = CheckWithTypeResolutionMojoTest::class.java.classLoader
-            .getResource("code-samples/valid")!!.toURI()
+            .getResource("code-samples/valid")?.toURI() ?: error("Failed to load resource")
         Paths.get(uri).toString()
     }
 
-    fun create(block: CTRMojo.() -> Unit = {}): CTRMojo {
+    private fun create(block: CTRMojo.() -> Unit = {}): CTRMojo {
         return CTRMojo().apply {
             input = validPackageNamingDirectoryPath
             mavenProject = createMockMavenProject()
