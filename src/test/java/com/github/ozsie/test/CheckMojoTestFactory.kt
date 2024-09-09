@@ -1,7 +1,7 @@
 package com.github.ozsie.test
 
 import com.github.ozsie.CheckMojo
-import com.github.ozsie.CheckMojoSpec
+import com.github.ozsie.CheckMojoTest
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock
@@ -13,13 +13,13 @@ import java.nio.file.Paths
 object CheckMojoTestFactory {
 
     private val invalidPackageNamingDirectoryPath by lazy {
-        val uri = CheckMojoSpec::class.java.classLoader
+        val uri = CheckMojoTest::class.java.classLoader
             .getResource("code-samples/invalid-package-naming")!!.toURI()
         Paths.get(uri).toString()
     }
 
     private val validPackageNamingDirectoryPath by lazy {
-        val uri = CheckMojoSpec::class.java.classLoader
+        val uri = CheckMojoTest::class.java.classLoader
             .getResource("code-samples/valid")!!.toURI()
         Paths.get(uri).toString()
     }

@@ -1,7 +1,7 @@
 package com.github.ozsie.test
 
 import com.github.ozsie.CTRMojo
-import com.github.ozsie.CheckWithTypeResolutionMojoSpec
+import com.github.ozsie.CheckWithTypeResolutionMojoTest
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock
@@ -13,13 +13,13 @@ import java.nio.file.Paths
 object CheckWithTypeResolutionMojoTestFactory {
 
     private val invalidPackageNamingDirectoryPath by lazy {
-        val uri = CheckWithTypeResolutionMojoSpec::class.java.classLoader
+        val uri = CheckWithTypeResolutionMojoTest::class.java.classLoader
             .getResource("code-samples/invalid-package-naming")!!.toURI()
         Paths.get(uri).toString()
     }
 
     private val validPackageNamingDirectoryPath by lazy {
-        val uri = CheckWithTypeResolutionMojoSpec::class.java.classLoader
+        val uri = CheckWithTypeResolutionMojoTest::class.java.classLoader
             .getResource("code-samples/valid")!!.toURI()
         Paths.get(uri).toString()
     }
