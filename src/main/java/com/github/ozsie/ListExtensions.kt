@@ -5,11 +5,9 @@ import org.apache.maven.model.Plugin
 import org.apache.maven.plugin.logging.Log
 import org.apache.maven.project.MavenProject
 
-internal fun <T> ArrayList<T>.log(log: Log): ArrayList<T> = apply {
-    StringBuilder().apply {
-        forEach { append(it).append(" ") }
-        log.info("Args: $this".trim())
-    }
+internal fun <T> ArrayList<T>.log(log: Log): ArrayList<T> = also {
+    val joined = this.joinToString(" ") { it.toString() }
+    log.info("Args: $joined")
 }
 
 internal fun <T> ArrayList<T>.useIf(w: Boolean, vararg value: T) = apply { if (w) addAll(value) }

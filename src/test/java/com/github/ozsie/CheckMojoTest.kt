@@ -10,6 +10,20 @@ class CheckMojoTest {
     private val invalidPackageNamingDirectoryPath = "$codeSamplesDirectory/invalid-package-naming"
 
     @Test
+    fun `a CheckMojo and 'autoCorrect' is true Unit is expected`() {
+        println("----AUTOCORREC----")
+        val checkMojo = CheckMojo()
+        checkMojo.autoCorrect = true
+        expect(Unit) {
+            checkMojo.execute()
+        }
+        val cliString = checkMojo.getCliSting()
+        expect(true) {
+            cliString.contains("-ac")
+        }
+    }
+
+    @Test
     fun `a CheckMojo and 'skip' is true Unit is expected`() {
         val checkMojo = CheckMojo()
         checkMojo.skip = true
