@@ -11,7 +11,6 @@ class CheckMojoTest {
 
     @Test
     fun `a CheckMojo and 'autoCorrect' is true Unit is expected`() {
-        println("----AUTOCORREC----")
         val checkMojo = CheckMojo()
         checkMojo.autoCorrect = true
         expect(Unit) {
