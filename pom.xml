@@ -45,7 +45,7 @@
         <snakeyaml.version>1.21</snakeyaml.version>
         <maven.api.version>3.9.16</maven.api.version>
         <maven-plugin-annotations.version>3.15.2</maven-plugin-annotations.version>
-        <plexus-utils.version>3.6.1</plexus-utils.version>
+        <plexus-utils.version>3.6.2</plexus-utils.version>
 
         <!-- Test -->
         <mockito-kotlin.version>1.6.0</mockito-kotlin.version>
